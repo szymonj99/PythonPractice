@@ -5,6 +5,7 @@
 #Ask the end user for name and surname
 #Store this data in the JSON database
 #Possible data redundancy check before the new input data is stored
+#Need to check amount of lines present in text file, and create a new entry on a new line.
 
 import os
 import webbrowser
@@ -14,16 +15,16 @@ from colour import Color
 
 
 fileName = "testJSONFile.json" #Used for testing, referenced later in code
-errorMessage = "Cancelling operation."
+errorMessage = "Cancelling operation." #Convenience to change error code. Used when no correct phrase is entered.
 
 def makeTextFile(): #Define function
     open(fileName,"w+") #Write permission, creating a file if it doesn't exist
     open(fileName,"w+").close() #closes the file
 
-if os.path.exists(fileName):
+if os.path.exists(fileName): #Checks if JSON file exists
     print(fileName,"already exists.")
 else:
-    makeTextFile()
+    makeTextFile() #only create a new file if no file exists.
 
 #makeTextFile() #Have to change this to checking if file ezists first, or else it overwrites information
 
@@ -32,14 +33,15 @@ userSurname = input("What's your surname?")
 
 print("Welcome,",userName,userSurname, "!")
 
-def mainMenuFunc():
+def mainMenuFunc(): #Function used for the main menu.
     mainMenuOptions = input("What do you want to do? You can save, open, or quit.")
     if mainMenuOptions == "save":
         storageQuestion = input("Do you want to store this information?")
         if storageQuestion == "yes":
-            open(fileName,"w").write(userName)
+#            open(fileName,"w").write(userName) #"w" replaces the whole file. Must change.
+            open(fileName,"a").write(userName) #Appends the file instead.
             print(fileName,"was saved.")
-            mainMenuFunc()
+            mainMenuFunc() #Referenced to repeat the code
         else:
             print(errorMessage)
             mainMenuFunc()
