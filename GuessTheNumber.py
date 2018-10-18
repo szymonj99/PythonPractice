@@ -1,7 +1,7 @@
 #!/usr/bin/env python3 //Runs on Python 3
 
 import random #Will be used for random numbers
-import time
+import time #Used for sleep command
 
 lowerRange = 1 #Defines the lower range for user to guess from
 upperRange = 10 #Defines the upper range for user to guess to
@@ -9,10 +9,10 @@ upperRange = 10 #Defines the upper range for user to guess to
 randomNumber = random.randint(lowerRange,upperRange) #randomNumber is picked between 1 and 10
 userTries = 1 #Give the user only one try
 
-print(randomNumber) #Used for debugging. Comment out later!!
+#print(randomNumber) #Used for debugging. Comment out later!!
 userName = input("Hi! What's your name?") #Prompt the end user for their name
 
-print("Welcome," + userName + "!")
+print("Welcome, " + userName + "!")
 
 startQuestion = input("Want to play a game? [Yes/No]")
 if startQuestion == "no":
