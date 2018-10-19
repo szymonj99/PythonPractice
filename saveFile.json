@@ -1,0 +1,10 @@
+{
+    "character save file": {
+        "characterName" : "placeHolder",
+        "characterClass" : "placeHolder",
+        "characterLevel" : "1",
+        "characterGold" : "1",
+        "characterXP" : "1",
+        "characterKillCount" : "1" 
+    }
+}
