@@ -22,8 +22,9 @@ timesFileSaved = 0 #Will be used to only allow user to save once per session.
 
 def makeTextFile(): #Define function
     open(fileName,"w+") #Write permission, creating a file if it doesn't exist
-    open(fileName,"a").write("User Log In History\n")
     open(fileName,"w+").close() #closes the file. Possibly makes previous line redundant
+    open(fileName,"a").write("User Log In History\n")
+    open(fileName,"a").close()
 
 if os.path.exists(fileName): #Checks if JSON file exists
     print(fileName,"already exists.")
