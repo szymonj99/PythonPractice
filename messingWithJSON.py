@@ -25,30 +25,30 @@ def makeTextFile(): #Define function
 if os.path.exists(fileName): #Checks if JSON file exists
     print(fileName,"already exists.")
 else:
-    print(fileName,"does not exist, but has now been created.")
+    print(fileName,"does not exist, but has now been created.\n")
     makeTextFile() #only create a new file if no file exists.
 
-userName = input("What's your name?")
-userSurname = input("What's your surname?")
+userName = input("What's your name?\n")
+userSurname = input("What's your surname?\n")
 
 print("Welcome,",userName,userSurname, "!")
 
 def mainMenuFunc(): #Function used for the main menu.
-    mainMenuOptions = input("What do you want to do? You can save, open, or quit.")
+    mainMenuOptions = input("What do you want to do? You can save, open, or quit.\n")
     if mainMenuOptions == "save":
-        storageQuestion = input("Do you want to store this information?")
+        storageQuestion = input("Do you want to store this information?\n")
         if storageQuestion == "yes":
 #            open(fileName,"w").write(userName) #"w" replaces the whole file. Must change.
-            open(fileName,"a").write(userName) #Appends the file instead.
+            open(fileName,"a").write(userName+" "+userSurname+"\n") #Appends the file instead. Writes user name and user surname with new line to make sure records don't overlap.
             print(fileName,"was saved.")
-#            timesFileSaved += 1 #Incrementally add 1 to prevent saving more than once
+#            timesFileSaved += 1 #Incrementally add 1 to prevent saving more than once. Currently tried to call before variable is set.
             mainMenuFunc() #Referenced to repeat the code
         else:
             print(errorMessage)
             mainMenuFunc()
         
     if mainMenuOptions == "open":
-        openQuestion = input("Do you want to open your JSON file?")
+        openQuestion = input("Do you want to open your JSON file?\n")
         if openQuestion == "yes":
             webbrowser.open(fileName)
             print(fileName,"was opened.")
@@ -57,8 +57,8 @@ def mainMenuFunc(): #Function used for the main menu.
             print(errorMessage)
             mainMenuFunc()
             
-    if mainMenuOptions == "quit":
-        quitQuestion = input("Do you want to quit?")
+    if mainMenuOptions == "quit": #Need to change. Currently hard coded, want to make the quit timer adjustable.
+        quitQuestion = input("Do you want to quit?\n")
         if quitQuestion == "yes":
             print("Program will exit in 2 seconds.")
             time.sleep(1)
