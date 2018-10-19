@@ -23,7 +23,7 @@ enemyDamageReduce = math.sqrt(enemyArmour) + enemyLevel
 
 #Used for testing to display proper rounding of numbers and proper and well-scaling logic.
 
-n = 10
+n = 5000
 testTotal = 0
 totalMisses = 0
 
@@ -38,6 +38,8 @@ for i in range (n,0,-1):
 
 
 averageDamage = testTotal/n
+percentageMiss = (totalMisses/n)*100
+print("Average miss rate was",(round(percentageMiss, 3)),"%")
 print("Total misses:",totalMisses,".")
 print("The total damage dealt over",n,"tries, was",testTotal)
 print("The average damage dealt was",(round(averageDamage)),".")
