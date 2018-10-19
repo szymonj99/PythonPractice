@@ -13,13 +13,16 @@ import webbrowser
 import json
 import time
 from colour import Color
+import datetime
 
+now = datetime.datetime.now()
 fileName = "testJSONFile.json" #Used for testing, referenced later in code
 errorMessage = "Cancelling operation." #Convenience to change error code. Used when no correct phrase is entered.
 timesFileSaved = 0 #Will be used to only allow user to save once per session.
 
 def makeTextFile(): #Define function
     open(fileName,"w+") #Write permission, creating a file if it doesn't exist
+    open(fileName,"a").write("User Log In History\n")
     open(fileName,"w+").close() #closes the file. Possibly makes previous line redundant
 
 if os.path.exists(fileName): #Checks if JSON file exists
@@ -39,7 +42,7 @@ def mainMenuFunc(): #Function used for the main menu.
         storageQuestion = input("Do you want to store this information?\n")
         if storageQuestion == "yes":
 #            open(fileName,"w").write(userName) #"w" replaces the whole file. Must change.
-            open(fileName,"a").write(userName+" "+userSurname+"\n") #Appends the file instead. Writes user name and user surname with new line to make sure records don't overlap.
+            open(fileName,"a").write(userName+" "+userSurname+" "+str(now)+"\n") #Appends the file instead. Writes user name and user surname with new line to make sure records don't overlap.
             print(fileName,"was saved.")
 #            timesFileSaved += 1 #Incrementally add 1 to prevent saving more than once. Currently tried to call before variable is set.
             mainMenuFunc() #Referenced to repeat the code
