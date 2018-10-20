@@ -47,13 +47,11 @@ def makeCharacterMenu():
             makeCharacterMenu()
 
 def clearTerminal(): 
-    # for windows 
-    if os.name == "nt": 
-        _ = os.system("cls") 
+    if os.name == "nt": #Used if system is windows
+        _ = os.system("cls") #Windows-specific
   
-    # for mac and linux(here, os.name is 'posix') 
     else: 
-        _ = os.system("clear") 
+        _ = os.system("clear") #Mac or linux
   
 
 def saveCharacter():
