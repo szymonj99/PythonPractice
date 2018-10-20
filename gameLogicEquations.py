@@ -21,8 +21,6 @@ enemyLevel = 37
 enemyArmour = 150
 enemyDamageReduce = math.sqrt(enemyArmour) + enemyLevel
 
-#Used for testing to display proper rounding of numbers and proper and well-scaling logic.
-
 n = 50000
 testTotal = 0 
 totalMisses = 0 
@@ -49,7 +47,7 @@ for i in range (n,0,-1):
         else:
             specialLoot += 1
 
-#        print(round(playerDamage))
+#        print(round(playerDamage)) #Used for testing to display proper rounding of numbers and proper and well-scaling logic. Works correctly, so disabled.
     else:
         totalMisses += 1
 
