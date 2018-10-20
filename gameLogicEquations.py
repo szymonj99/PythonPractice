@@ -54,9 +54,10 @@ for i in range (n,0,-1):
         totalMisses += 1
 
 totalLoot = commonLoot + uncommonLoot + rareLoot + specialLoot
+lootPercentage = (totalLoot/n)*100
 averageDamage = testTotal/n
 percentageMiss = (totalMisses/n)*100
-print("Average miss rate was",(round(percentageMiss, 3)),"%")
+print("Average miss rate was",(round(percentageMiss, 2)),"%")
 print("Total misses:",totalMisses,".")
 print("The total damage dealt over",n,"tries, was",testTotal)
 print("The average damage dealt was",(round(averageDamage)),".")
@@ -66,4 +67,5 @@ print("Common Loot:", commonLoot)
 print("Uncommon Loot:", uncommonLoot)
 print("Rare Loot:", rareLoot)
 print("Special Loot:", specialLoot)
+print("Loot drop percentage was",(round(lootPercentage,2)),"%.")
 
