@@ -132,7 +132,10 @@ def playerPickedSleep():
 def playerLosingGold():
     global playerRequiredExperience, goldPlayerLoses, playerGold
     goldPlayerLoses = round(playerRequiredExperience/5)
-    playerGold = playerGold - goldPlayerLoses
+    if (goldPlayerLoses >= playerGold):
+        playerGold = 0
+    else:
+        playerGold = playerGold - goldPlayerLoses
 
 def playerPickedFlee(): #This will be used in combat only.
     global playerInFight
