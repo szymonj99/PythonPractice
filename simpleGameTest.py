@@ -141,7 +141,11 @@ def playerPickedFlee(): #This will be used in combat only.
     global playerInFight
     if playerInFight == True:
         playerLosingGold()
-        print(playerDecidedToFleeMessage, "\nYou lost", goldPlayerLoses, "gold!")
+        print(playerDecidedToFleeMessage)
+        if (goldPlayerLoses >= playerGold):
+            print("You lost all your gold!")
+        else:
+            print("You lost", goldPlayerLoses, "gold!")
         playerNextAction()
     else:
         print("You can only flee when fighting.")
