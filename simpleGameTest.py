@@ -41,6 +41,7 @@ playerHitChance = 85 #%
 playerCurrentExperience = 0 #Should set up an XP table, or think of a formula.
 playerRequiredExperience = round((playerLevel+5) ** 2)#The total Experience points the player needs to level up.
 playerGold = 0 #Sample currency, Proof Of Concept.
+playerInFight = False
 
 def makeSaveFile(): #Define function
     open(fileName,"w+") #Write permission, creating a file if it doesn't exist
@@ -88,7 +89,7 @@ def classConfirmation():
 
 def pickCharacterClass():
     global invalidClassInput
-    characterClass = input("What class would you like to be?\n")
+    characterClass = input("What class would you like to be? [Warrior/Archer/Mage]\n")
     if characterClass in confirmationWarriorInput:
         playerPickedWarrior()        
     
@@ -103,7 +104,7 @@ def pickCharacterClass():
         pickCharacterClass()
 
 def playerNextAction():
-    nextAction = input("What would you like to do now? [Sleep/Fight/Flee]\n")
+    nextAction = input("What would you like to do now? [Sleep/Fight/Flee/Info]\n")
     if nextAction in fight:
         playerPickedFight()
     
@@ -128,18 +129,27 @@ def playerPickedSleep():
     print(playerDecidedToSleepMessage)
     playerNextAction()
 
+def playerLosingGold():
+    global playerRequiredExperience, goldPlayerLoses, playerGold
+    goldPlayerLoses = round(playerRequiredExperience/5)
+    playerGold = playerGold - goldPlayerLoses
+
 def playerPickedFlee(): #This will be used in combat only.
     print(playerDecidedToFleeMessage)
+    playerLosingGold()
     playerNextAction()
 
 def printPlayerStatistics():
     print(
-        "   Level:", playerLevel,"\n",
-        "  Strength:", playerStrength,"\n"
-        "   Health:", playerHealth,"\n",
-        "  Hit Multiplier:", playerDamageMultiplier,"\n"
-        "   Experience:", playerCurrentExperience,"\n",
-        "  XP To Level Up:", playerRequiredExperience,"\n"
+        "  Name:", characterName,"\n",
+        "  Class:", characterClass,"\n",
+        "  Level:", playerLevel,"\n",
+        "  Strength:", playerStrength,"\n",
+        "  Health:", playerHealth,"\n",
+        "  Hit Multiplier:", playerDamageMultiplier,"\n",
+        "  Experience:", playerCurrentExperience,"\n",
+        "  XP To Level Up:", playerRequiredExperience,"\n",
+        "  Gold:", playerGold,"\n",
         )
 
 def playerPickedInfo():
@@ -159,6 +169,8 @@ def enemyLevelGenerator():
     elif (playerLevel == 3):
         enemyLevel = random.randint(playerLevel-2,playerLevel+4)
         enemyEvasionChanceGenerator()
+    elif (playerLevel >= 75):
+        enemyLevel = 75 #Max. Level for now is 75, else the random number gen for enemyEvasionChance would break.
     else:
         enemyLevel = random.randint(playerLevel-2,playerLevel+5)
         enemyEvasionChanceGenerator()
@@ -179,12 +191,12 @@ def enemyStatsGenerator():
 
 def printEnemyStatistics():
     print(
-        "   Enemy Level:", enemyLevel,"\n",
-        "  Enemy Strength:", enemyStrength,"\n"
-        "   Enemy Health:", enemyHealth,"\n",
-        "  Enemy Armour:", enemyArmour,"\n"
-        "   Enemy Damage Reduce:", enemyDamageReduce,"\n",
-        "  Enemy Evasion Chance:", enemyEvasionChance,"\n"
+        "  Enemy Level:", enemyLevel,"\n",
+        "  Enemy Strength:", enemyStrength,"\n",
+        "  Enemy Health:", enemyHealth,"\n",
+        "  Enemy Armour:", enemyArmour,"\n",
+        "  Enemy Damage Reduce:", enemyDamageReduce,"\n",
+        "  Enemy Evasion Chance:", enemyEvasionChance,"\n",
         )
 
 def playerFightChoice():
@@ -225,7 +237,6 @@ def gameInterface():
     playerNextAction()
 #    nextAction = input("What would you like to do?[Fight/Sleep/Gather/Shop]\n")
 #    if nextAction == "Fight":
-
 
 if os.path.exists(fileName): #Checks if JSON file exists
     print("Your save file,",fileName,"already exists.\nYour game will begin in 2 seconds.")
