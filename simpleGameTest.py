@@ -30,7 +30,6 @@ playerDecidedToAttackMessage = "You gather your strength, and are ready to strik
 #fightBeginMessage = "You are fighting!"
 #fightWinMessage = "You won!"
 #fightLossMessage = "You lost..."
-
 playerLevel = 15 #Used for debugging
 playerStrength = 15
 playerHealth = playerLevel + round(playerStrength/2)
@@ -48,8 +47,7 @@ def makeSaveFile(): #Define function
     open(fileName,"w+").close() #closes the file. Possibly makes previous line redundant
 
 def makeCharacterMenu():
-    global characterName
-    global characterClass
+    global characterName, characterClass
     characterName = input("What would you like to be called?\n")
     pickCharacterClass()
 
@@ -91,32 +89,27 @@ def pickCharacterClass():
     global invalidClassInput
     characterClass = input("What class would you like to be? [Warrior/Archer/Mage]\n")
     if characterClass in confirmationWarriorInput:
-        playerPickedWarrior()        
-    
+        playerPickedWarrior()           
     elif characterClass in confirmationArcherInput:
         playerPickedArcher()        
-
     elif characterClass in confirmationMageInput:
         playerPickedMage()
-
     else:
         print(invalidClassInput)
         pickCharacterClass()
 
 def playerNextAction():
+    global playerInFight
+    playerInFight = False
     nextAction = input("What would you like to do now? [Sleep/Fight/Flee/Info]\n")
     if nextAction in fight:
         playerPickedFight()
-    
     elif nextAction in sleep:
         playerPickedSleep()
-
     elif nextAction in flee:
         playerPickedFlee()
-
     elif nextAction in info:
         playerPickedInfo()
-
     else:
         print(errorMessage)
         playerNextAction()
@@ -135,9 +128,14 @@ def playerLosingGold():
     playerGold = playerGold - goldPlayerLoses
 
 def playerPickedFlee(): #This will be used in combat only.
-    print(playerDecidedToFleeMessage)
-    playerLosingGold()
-    playerNextAction()
+    global playerInFight
+    if playerInFight == True:
+        playerLosingGold()
+        print(playerDecidedToFleeMessage, "\nYou lost", goldPlayerLoses, "gold!")
+        playerNextAction()
+    else:
+        print("You can only flee when fighting.")
+        playerNextAction()
 
 def printPlayerStatistics():
     print(
@@ -191,7 +189,7 @@ def enemyStatsGenerator():
 
 def printEnemyStatistics():
     print(
-        "  Enemy Level:", enemyLevel,"\n",
+        "   Enemy Level:", enemyLevel,"\n",
         "  Enemy Strength:", enemyStrength,"\n",
         "  Enemy Health:", enemyHealth,"\n",
         "  Enemy Armour:", enemyArmour,"\n",
@@ -200,6 +198,8 @@ def printEnemyStatistics():
         )
 
 def playerFightChoice():
+    global playerInFight
+    playerInFight = True
     playerAttackOrFlee = input("What do you wish to do? [Attack/Flee]")
     if playerAttackOrFlee in attack:
         playerPickedAttack()
@@ -216,15 +216,14 @@ def playerPickedAttack():
     time.sleep(1) #Need to further develop this method and fightCalculations()
 
 
-def clearTerminal(): 
+def clearTerminal():  #Not my piece of code
     if os.name == "nt": #Used if system is windows
         _ = os.system("cls") #Windows-specific
-  
     else: 
         _ = os.system("clear") #Mac or linux
   
 
-def saveCharacter():
+def saveCharacter(): #not functional right now
 #    with open(fileName) as saveFile:    
 #        saveData = json.load(saveFile)
 #        pprint.pprint(saveData)
