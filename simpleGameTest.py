@@ -26,6 +26,7 @@ playerDecidedToFightMessage = "You encountered an enemy!"
 playerDecidedToSleepMessage = "You have decided to rest, and recover your health..."
 playerDecidedToFleeMessage = "You flee! Coward!"
 playerDecidedToAttackMessage = "You gather your strength, and are ready to strike!"
+victoryMessage = "You won!"
 #nextMoveMessage = "What is your next move?"
 #fightBeginMessage = "You are fighting!"
 #fightWinMessage = "You won!"
@@ -118,8 +119,14 @@ def playerPickedFight():
     print(playerDecidedToFightMessage)
     enemyStatsGenerator()
 
+def calculateDamageToEnemy():
+    print("Test.")
+
+
 def playerPickedSleep():
+    global playerHealth
     print(playerDecidedToSleepMessage)
+    playerHealth = playerLevel + round(playerStrength/2)
     playerNextAction()
 
 def playerLosingGold():
@@ -139,15 +146,17 @@ def playerPickedFlee(): #This will be used in combat only.
 
 def printPlayerStatistics():
     print(
-        "  Name:", characterName,"\n",
+        "   Name:", characterName,"\n",
         "  Class:", characterClass,"\n",
         "  Level:", playerLevel,"\n",
         "  Strength:", playerStrength,"\n",
         "  Health:", playerHealth,"\n",
         "  Hit Multiplier:", playerDamageMultiplier,"\n",
         "  Experience:", playerCurrentExperience,"\n",
-        "  XP To Level Up:", playerRequiredExperience,"\n",
+        "  XP To Level Up:", playerRequiredExperience - playerCurrentExperience,"\n",
         "  Gold:", playerGold,"\n",
+        "  Damage Range:", playerDamageLowerRange, "-", playerDamageUpperRange, "\n",
+        "  Avg. Damage:", round((playerDamageLowerRange + playerDamageUpperRange)/2),"\n",
         )
 
 def playerPickedInfo():
@@ -200,7 +209,7 @@ def printEnemyStatistics():
 def playerFightChoice():
     global playerInFight
     playerInFight = True
-    playerAttackOrFlee = input("What do you wish to do? [Attack/Flee]")
+    playerAttackOrFlee = input("What do you wish to do? [Attack/Flee]\n")
     if playerAttackOrFlee in attack:
         playerPickedAttack()
     elif playerAttackOrFlee in flee:
@@ -209,11 +218,40 @@ def playerFightChoice():
         print(errorMessage)
         playerFightChoice()
 
-#def fightCalculations():
-
 def playerPickedAttack():
+    global enemyHealth
     print(playerDecidedToAttackMessage)
     time.sleep(1) #Need to further develop this method and fightCalculations()
+    playerDamageGeneratorDuringFight()
+    enemyHealth = enemyHealth - playerDamageToDeal
+    print("You hit the enemy for", playerDamageToDeal, "damage.")
+    if (enemyHealth > 0):
+        print("The enemy has", enemyHealth, "health left.")
+    enemyAttacksPlayer()
+
+    
+def playerDamageGeneratorDuringFight():
+    global playerDamageToDeal
+    playerDamageToDeal = round(random.uniform(playerDamageLowerRange,playerDamageUpperRange))
+
+def enemyAttacksPlayer():
+    global enemyHealth, playerGold, enemyLevel, playerCurrentExperience, enemyStrength, playerHealth
+    if (enemyHealth > 0):
+        print("The enemy strikes back!")
+        playerDamageTaken = round(enemyStrength/2)
+        playerHealth = playerHealth - playerDamageTaken
+        print("You took", playerDamageTaken, "damage.")        
+        if (playerHealth > 0):
+            print("You have", playerHealth, "health left.")
+            playerFightChoice()
+        else:
+            print("You died.")
+    else:
+        print(victoryMessage)
+        playerGold = playerGold + enemyLevel
+        playerCurrentExperience = playerCurrentExperience + enemyLevel
+        playerNextAction()
+
 
 
 def clearTerminal():  #Not my piece of code
