@@ -37,11 +37,13 @@ playerHealth = playerLevel + round(playerStrength/2)
 playerDamageMultiplier = 1.125 + playerLevel/100
 playerDamageLowerRange = playerStrength + 5
 playerDamageUpperRange = (playerStrength + 5) * playerDamageMultiplier
-playerHitChance = 85 #%
+playerHitChance = 90 #%
 playerCurrentExperience = 0 #Should set up an XP table, or think of a formula.
 playerRequiredExperience = round((playerLevel+5) ** 2)#The total Experience points the player needs to level up.
 playerGold = 0 #Sample currency, Proof Of Concept.
 playerInFight = False
+playerDidHit = False
+playerDidMiss = False
 
 def makeSaveFile(): #Define function
     open(fileName,"w+") #Write permission, creating a file if it doesn't exist
@@ -119,9 +121,12 @@ def playerPickedFight():
     print(playerDecidedToFightMessage)
     enemyStatsGenerator()
 
-def calculateDamageToEnemy():
-    print("Test.")
-
+def didPlayerHit():
+    global playerHitChance, playerDidHit, playerDidMiss
+    if (playerHitChance >= random.randint(0,100)):
+        playerDidHit = True
+    else:
+        playerDidMiss = True
 
 def playerPickedSleep():
     global playerHealth
@@ -162,6 +167,7 @@ def printPlayerStatistics():
         "  Experience:", playerCurrentExperience,"\n",
         "  XP To Level Up:", playerRequiredExperience - playerCurrentExperience,"\n",
         "  Gold:", playerGold,"\n",
+        "  Hit Chance:", playerHitChance,"\n",
         "  Damage Range:", playerDamageLowerRange, "-", playerDamageUpperRange, "\n",
         "  Avg. Damage:", round((playerDamageLowerRange + playerDamageUpperRange)/2),"\n",
         )
@@ -176,26 +182,22 @@ def enemyLevelGenerator():
     global playerLevel, enemyLevel
     if (playerLevel == 1): #Adding some level 1-3 enemy variations.
         enemyLevel = random.randint(playerLevel,playerLevel+2) #Enemy level is somewhere within -2 to +5 levels within player. Trouble when player level is 1-3. Need to fix.
-        enemyEvasionChanceGenerator()
     elif (playerLevel == 2):
         enemyLevel = random.randint(playerLevel-1,playerLevel+3)
-        enemyEvasionChanceGenerator()
     elif (playerLevel == 3):
         enemyLevel = random.randint(playerLevel-2,playerLevel+4)
-        enemyEvasionChanceGenerator()
     elif (playerLevel >= 75):
         enemyLevel = 75 #Max. Level for now is 75, else the random number gen for enemyEvasionChance would break.
     else:
         enemyLevel = random.randint(playerLevel-2,playerLevel+5)
-        enemyEvasionChanceGenerator()
 
-def enemyEvasionChanceGenerator():
-    global enemyEvasionChance 
-    enemyEvasionChance = random.randint(enemyLevel,100) #Could potentially change lower boundary to enemyLevel, to make it more difficult as game progresses.
+#def enemyEvasionChanceGenerator():
+#    global enemyEvasionChance 
+#    enemyEvasionChance = random.randint(enemyLevel,100) #Could potentially change lower boundary to enemyLevel, to make it more difficult as game progresses.
 
 def enemyStatsGenerator():
     enemyLevelGenerator()
-    global enemyLevel, enemyEvasionChance, enemyHealth, enemyDamageReduce, enemyArmour, enemyStrength
+    global enemyLevel, enemyHealth, enemyDamageReduce, enemyArmour, enemyStrength
     enemyStrength = round(random.uniform(enemyLevel+5,(enemyLevel+5)*1.35)) #
     enemyHealth = enemyLevel + round(enemyStrength/2)
     enemyArmour = round(random.uniform(enemyLevel*3,enemyLevel*7))
@@ -210,7 +212,6 @@ def printEnemyStatistics():
         "  Enemy Health:", enemyHealth,"\n",
         "  Enemy Armour:", enemyArmour,"\n",
         "  Enemy Damage Reduce:", enemyDamageReduce,"\n",
-        "  Enemy Evasion Chance:", enemyEvasionChance,"\n",
         )
 
 def playerFightChoice():
@@ -226,14 +227,18 @@ def playerFightChoice():
         playerFightChoice()
 
 def playerPickedAttack():
-    global enemyHealth
+    global enemyHealth, playerDidHit, playerDidMiss
     print(playerDecidedToAttackMessage)
     time.sleep(1) #Need to further develop this method and fightCalculations()
+    didPlayerHit()
     playerDamageGeneratorDuringFight()
-    enemyHealth = enemyHealth - playerDamageToDeal
-    print("You hit the enemy for", playerDamageToDeal, "damage.")
-    if (enemyHealth > 0):
-        print("The enemy has", enemyHealth, "health left.")
+    if playerDidHit == True:
+        enemyHealth = enemyHealth - playerDamageToDeal
+        print("You hit the enemy for", playerDamageToDeal, "damage.")
+        if (enemyHealth > 0):
+            print("The enemy has", enemyHealth, "health left.")
+    elif playerDidMiss == True:
+        print("You missed!")
     enemyAttacksPlayer()
 
     
