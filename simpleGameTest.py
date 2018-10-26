@@ -6,6 +6,7 @@ import pprint
 import random
 import time
 import math
+from colorama import Fore, Back, Style
 
 fileName = "saveFile.json"
 errorMessage = "Error. Unknown or unexpected input."
@@ -106,7 +107,7 @@ def pickCharacterClass():
 def playerNextAction():
     global playerInFight
     playerInFight = False
-    nextAction = input("What would you like to do now? [Sleep/Fight/Flee/Info]\n")
+    nextAction = input("What would you like to do now? [" + Fore.BLUE + "Sleep" + Fore.WHITE + "/" + Fore.RED + "Fight" + Fore.WHITE + "/" + Fore.YELLOW + "Flee" + Fore.WHITE + "/" + Fore.GREEN + "Info" + Fore.WHITE + "]\n")
     if nextAction in fight:
         playerPickedFight()
     elif nextAction in sleep:
@@ -120,7 +121,7 @@ def playerNextAction():
         playerNextAction()
 
 def playerPickedFight():
-    print(playerDecidedToFightMessage)
+    print(playerDecidedToFightMessage+"\n")
     enemyStatsGenerator()
 
 def didPlayerHit():
@@ -236,9 +237,9 @@ def playerPickedAttack():
     playerDamageGeneratorDuringFight()
     if playerDidHit == True:
         enemyHealth = enemyHealth - playerDamageToDeal
-        print("You hit the enemy for", playerDamageToDeal, "damage.")
+        print("You " + Fore.GREEN + "hit " + Fore.WHITE + "the enemy for", playerDamageToDeal, "damage.")
         if (enemyHealth > 0):
-            print("The enemy has", enemyHealth, "health left.")
+            print("The enemy has" + Fore.GREEN, enemyHealth, Fore.WHITE + "health left.")
     elif playerDidMiss == True:
         print("You missed!")
     enemyAttacksPlayer()
@@ -254,16 +255,16 @@ def enemyAttacksPlayer():
         print("The enemy strikes back!")
         playerDamageTaken = round(enemyStrength/2)
         playerHealth = playerHealth - playerDamageTaken
-        print("You took", playerDamageTaken, "damage.")        
+        print("You took" + Fore.YELLOW, playerDamageTaken, Fore.WHITE + "damage.")        
         if (playerHealth > 0):
-            print("You have", playerHealth, "health left.")
+            print("You have" + Fore.GREEN, playerHealth, Fore.WHITE + "health left.")
             playerFightChoice()
         else:
-            print("You died.")
+            print(Fore.RED +"You Died..." + Fore.WHITE)
     else:
-        print(victoryMessage)
         playerGold = playerGold + enemyLevel
         playerCurrentExperience = playerCurrentExperience + enemyLevel
+        print(Fore.GREEN + victoryMessage,"\nYou have gained",enemyLevel,"gold and experience." + Fore.WHITE)
         playerNextAction()
 
 
