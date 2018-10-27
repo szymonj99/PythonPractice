@@ -180,7 +180,6 @@ def playerPickedInfo():
     printPlayerStatistics()
     playerNextAction()
 
-
 def enemyLevelGenerator():
     global playerLevel, enemyLevel
     if (playerLevel == 1): #Adding some level 1-3 enemy variations.
@@ -193,10 +192,6 @@ def enemyLevelGenerator():
         enemyLevel = 75 #Max. Level for now is 75, else the random number gen for enemyEvasionChance would break.
     else:
         enemyLevel = random.randint(playerLevel-2,playerLevel+5)
-
-#def enemyEvasionChanceGenerator():
-#    global enemyEvasionChance 
-#    enemyEvasionChance = random.randint(enemyLevel,100) #Could potentially change lower boundary to enemyLevel, to make it more difficult as game progresses.
 
 def enemyStatsGenerator():
     enemyLevelGenerator()
@@ -244,7 +239,6 @@ def playerPickedAttack():
         print("You missed!")
     enemyAttacksPlayer()
 
-    
 def playerDamageGeneratorDuringFight():
     global playerDamageToDeal
     playerDamageToDeal = round(random.uniform(playerDamageLowerRange,playerDamageUpperRange))
@@ -267,15 +261,12 @@ def enemyAttacksPlayer():
         print(Fore.GREEN + victoryMessage,"\nYou have gained",enemyLevel,"gold and experience." + Fore.WHITE)
         playerNextAction()
 
-
-
 def clearTerminal():  #Not my piece of code
     if os.name == "nt": #Used if system is windows
         _ = os.system("cls") #Windows-specific
     else: 
         _ = os.system("clear") #Mac or linux
   
-
 def saveCharacter(): #not functional right now
 #    with open(fileName) as saveFile:    
 #        saveData = json.load(saveFile)
