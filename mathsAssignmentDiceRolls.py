@@ -16,6 +16,8 @@ grannyLandedOnSnakes = 0
 grannyLandedOnLadders = 0
 youLandedOnSnakes = 0
 youLandedOnLadders = 0
+yourDiceRollTotal = 0
+grannyDiceRollTotal = 0
 
 ######SETTING UP SNAKES######
 
@@ -198,18 +200,22 @@ def checkForWinner():
     if (grannyCurrentPosition >= 100):
         print("Granny Won!")
         print("Granny stepped on snakes" , grannyLandedOnSnakes , "times, and" , grannyLandedOnLadders , "times on ladders.")
+        print("Granny Total Dice Rolls:" , grannyDiceRollTotal)
+        print("Your Dice Roll Total:" , yourDiceRollTotal)
         sys.exit(2)
 
     elif (yourCurrentPosition >= 100):
         print("You won!")
         print("You stepped on snakes" , youLandedOnSnakes , "times, and" , youLandedOnLadders , "times on ladders.")
+        print("Granny Total Dice Rolls:" , grannyDiceRollTotal)
+        print("Your Dice Roll Total:" , yourDiceRollTotal)
         sys.exit(2)
 
     else:
         diceRollRandomisationDecision()
 
 def grannyRandomRoll():
-    global grannyStartingPosition, grannyCurrentPosition, currentDiceRoll, grannyDiceOneNumberOne, grannyDiceOneNumberTwo, grannyDiceTwoNumberOne, grannyDiceTwoNumberTwo
+    global grannyDiceRollTotal, grannyStartingPosition, grannyCurrentPosition, currentDiceRoll, grannyDiceOneNumberOne, grannyDiceOneNumberTwo, grannyDiceTwoNumberOne, grannyDiceTwoNumberTwo
     diceOneRandomSelection = random.randint(1,2)
     diceTwoRandomSelection = random.randint(1,2)
 
@@ -237,6 +243,7 @@ def grannyRandomRoll():
         grannyCurrentPosition = grannyCurrentPosition + grannyTotal
         didGrannyLandOnSnakeOrLadder()
 
+    grannyDiceRollTotal += 1
     currentDiceRoll += 1
     checkForWinner()
 
@@ -286,7 +293,7 @@ def didGrannyLandOnSnakeOrLadder():
     print("Granny is on position:" , grannyCurrentPosition)
 
 def youRandomRoll():
-    global yourStartingPosition, yourCurrentPosition, currentDiceRoll, youDiceOneNumberOne, youDiceOneNumberTwo, youDiceTwoNumberOne, youDiceTwoNumberTwo
+    global playerDiceRollTotal, yourStartingPosition, yourCurrentPosition, currentDiceRoll, youDiceOneNumberOne, youDiceOneNumberTwo, youDiceTwoNumberOne, youDiceTwoNumberTwo
     diceOneRandomSelection = random.randint(1,2)
     diceTwoRandomSelection = random.randint(1,2)
 
@@ -314,6 +321,7 @@ def youRandomRoll():
         yourCurrentPosition = yourCurrentPosition + yourTotal
         didYouLandOnSnakeOrLadder()
 
+    yourDiceRollTotal += 1
     currentDiceRoll += 1
     checkForWinner()
 
