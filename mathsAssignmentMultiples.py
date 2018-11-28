@@ -1,6 +1,5 @@
 #!/usr/bin/env python3 //Runs on Python 3
 
-import random
 import math
 
 boardLimit = 100
