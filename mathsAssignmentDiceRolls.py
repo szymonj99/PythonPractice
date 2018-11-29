@@ -4,13 +4,20 @@ import random
 import time
 import math
 import sys
+import argparse
 from colorama import Fore, Back, Style
+
+######SETTING UP PARSER ARGUMENT######
+
+parser = argparse.ArgumentParser()
+parser.add_argument("gamesToPlay", help="How many games to play out?", type=int)
+args = parser.parse_args()
 
 ######SETTING GAME VARIABLES######
 
 diceLowerLimit = 1
 diceHigherLimit = 6
-currentDiceRoll = 2
+currentDiceRoll = 2 #Does not represent actual dice rolls. Only used to calculate %2, to see if it is odd or even, and to decide who's turn it is.
 grannyCurrentPosition = 1
 yourCurrentPosition = 1
 grannyLandedOnSnakes = 0
@@ -19,6 +26,10 @@ youLandedOnSnakes = 0
 youLandedOnLadders = 0
 yourDiceRollTotal = 0
 grannyDiceRollTotal = 0
+currentGame = 1
+gamesToPlay = args.gamesToPlay
+gamesYouWon = 0
+gamesGrannyWon = 0
 
 ######SETTING UP SNAKES######
 
@@ -182,10 +193,10 @@ def printBothDice():
 
 def diceRollRandomisationDecision():
     global currentDiceRoll
-    print("Roll again? [Yes/No]")
-    userWantsNextRoll = input()
+#    print("Roll again? [Yes/No]")
+#    userWantsNextRoll = input()
 
-    if userWantsNextRoll in yes:
+    if (gamesToPlay >= currentGame):
 
         if (currentDiceRoll % 2) == 0:
             grannyRandomRoll()
@@ -193,16 +204,30 @@ def diceRollRandomisationDecision():
         elif (currentDiceRoll % 2) == 1:
             youRandomRoll()
 
-    elif userWantsNextRoll in no:
+    else:
         sys.exit(0)
 
-    else:
-        print("Command not recognized.")
-        diceRollRandomisationDecision()
+#    if userWantsNextRoll in yes:
+#
+#        if (currentDiceRoll % 2) == 0:
+#            grannyRandomRoll()
+#
+#        elif (currentDiceRoll % 2) == 1:
+#            youRandomRoll()
+#
+#    elif userWantsNextRoll in no:
+#        sys.exit(0)
+#
+#    else:
+#        print("Command not recognized.")
+#        diceRollRandomisationDecision()
 
 def checkForWinner():
+    global currentGame, gamesYouWon, gamesGrannyWon
 
     if (grannyCurrentPosition >= 100):
+        currentGame += 1
+        gamesGrannyWon += 1
         print(Fore.MAGENTA)
         print("Granny Won!")
         print("Granny stepped on snakes" , grannyLandedOnSnakes , "times, and" , grannyLandedOnLadders , "times on ladders.")
@@ -211,9 +236,12 @@ def checkForWinner():
         print(Fore.GREEN)
         print("You stepped on snakes" , youLandedOnSnakes , "times, and" , youLandedOnLadders , "times on ladders.")
         print(Fore.WHITE)
-        sys.exit(2)
+        haveAllGamesBeenPlayed() 
+#        sys.exit(2)
 
     elif (yourCurrentPosition >= 100):
+        currentGame += 1
+        gamesYouWon += 1
         print(Fore.GREEN)
         print("You won!")
         print("You stepped on snakes" , youLandedOnSnakes , "times, and" , youLandedOnLadders , "times on ladders.")
@@ -222,7 +250,8 @@ def checkForWinner():
         print(Fore.MAGENTA)
         print("Granny stepped on snakes" , grannyLandedOnSnakes , "times, and" , grannyLandedOnLadders , "times on ladders.")
         print(Fore.WHITE)
-        sys.exit(2)
+        haveAllGamesBeenPlayed()
+#        sys.exit(2)
 
     else:
         diceRollRandomisationDecision()
@@ -410,6 +439,30 @@ def didYouLandOnSnakeOrLadder():
     print(Fore.GREEN) #Changes terminal colour to green
     print("You are on position:" , yourCurrentPosition)
     print(Fore.WHITE) #changes terminal colour to white
+
+def startNewGame():
+    global currentDiceRoll, grannyCurrentPosition, yourCurrentPosition, grannyLandedOnSnakes, grannyLandedOnLadders, youLandedOnSnakes, youLandedOnLadders, yourDiceRollTotal, grannyDiceRollTotal
+    currentDiceRoll = 2 #Does not represent actual dice rolls. Only used to calculate %2, to see if it is odd or even, and to decide who's turn it is.
+    grannyCurrentPosition = 1
+    yourCurrentPosition = 1
+    grannyLandedOnSnakes = 0
+    grannyLandedOnLadders = 0
+    youLandedOnSnakes = 0
+    youLandedOnLadders = 0
+    yourDiceRollTotal = 0
+    grannyDiceRollTotal = 0
+    diceRollRandomisationDecision()
+
+def haveAllGamesBeenPlayed():
+
+    if (currentGame > gamesToPlay):
+
+        print("Games You Won:", gamesYouWon)
+        print("Games Granny Won:", gamesGrannyWon)
+
+    else:
+        
+        startNewGame()
 
 ###PROGRAM EXECUTION###
 
