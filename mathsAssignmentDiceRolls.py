@@ -31,36 +31,67 @@ currentGame = 1
 gamesToPlay = args.gamesToPlay
 gamesYouWon = 0
 gamesGrannyWon = 0
+boardLayout = args.boardLayout
 
-######SETTING UP SNAKES######
+######SETTING UP SNAKES BOARD ONE######
 
-#Maths assignment needs to different boards.
-#Will set up a second board with different positions of snakes and ladders.
-#Boards will be decided by another argument maybe?
+def setUpSnakesBoardOne():
+    global snakeOneStart, snakeOneFinish, snakeTwoStart, snakeTwoFinish, snakeThreeStart, snakeThreeFinish, snakeFourStart, snakeFourFinish, snakeFiveStart, snakeFiveFinish
+    snakeOneStart = 13
+    snakeOneFinish = 7
+    snakeTwoStart = 27
+    snakeTwoFinish = 15
+    snakeThreeStart = 69
+    snakeThreeFinish = 57
+    snakeFourStart = 75
+    snakeFourFinish = 43
+    snakeFiveStart = 94
+    snakeFiveFinish = 76
 
-snakeOneStart = 13
-snakeOneFinish = 7
-snakeTwoStart = 27
-snakeTwoFinish = 15
-snakeThreeStart = 69
-snakeThreeFinish = 57
-snakeFourStart = 75
-snakeFourFinish = 43
-snakeFiveStart = 94
-snakeFiveFinish = 76
+######SETTING UP SNAKES BOARD TWO######
 
-######SETTING UP LADDERS######
+def setUpSnakesBoardTwo():
+    global snakeOneStart, snakeOneFinish, snakeTwoStart, snakeTwoFinish, snakeThreeStart, snakeThreeFinish, snakeFourStart, snakeFourFinish, snakeFiveStart, snakeFiveFinish
+    snakeOneStart = 13
+    snakeOneFinish = 7
+    snakeTwoStart = 27
+    snakeTwoFinish = 15
+    snakeThreeStart = 69
+    snakeThreeFinish = 57
+    snakeFourStart = 75
+    snakeFourFinish = 43
+    snakeFiveStart = 94
+    snakeFiveFinish = 76
 
-ladderOneStart = 18
-ladderOneFinish = 38
-ladderTwoStart = 45
-ladderTwoFinish = 55
-ladderThreeStart = 52
-ladderThreeFinish = 62
-ladderFourStart = 63
-ladderFourFinish = 73
-ladderFiveStart = 77
-ladderFiveFinish = 87
+######SETTING UP LADDERS BOARD ONE######
+
+def setUpLaddersBoardOne():
+    global ladderOneStart, ladderOneFinish, ladderTwoStart, ladderTwoFinish, ladderThreeStart, ladderThreeFinish, ladderFourStart, ladderFourFinish, ladderFiveStart, ladderFiveFinish
+    ladderOneStart = 18
+    ladderOneFinish = 38
+    ladderTwoStart = 45
+    ladderTwoFinish = 55
+    ladderThreeStart = 52
+    ladderThreeFinish = 62
+    ladderFourStart = 63
+    ladderFourFinish = 73
+    ladderFiveStart = 77
+    ladderFiveFinish = 87
+
+######SETTING UP LADDERS BOARD ONE######
+
+def setUpLaddersBoardTwo():
+    global ladderOneStart, ladderOnefinish, ladderTwoStart, ladderTwoFinish, ladderThreeStart, ladderThreeFinish, ladderFourStart, ladderFourFinish, ladderFiveStart, ladderFiveFinish
+    ladderOneStart = 18
+    ladderOneFinish = 38
+    ladderTwoStart = 45
+    ladderTwoFinish = 55
+    ladderThreeStart = 52
+    ladderThreeFinish = 62
+    ladderFourStart = 63
+    ladderFourFinish = 73
+    ladderFiveStart = 77
+    ladderFiveFinish = 87
 
 #####QUICK STRING USED FOR USER INPUT RECOGNITION#####
 
@@ -469,6 +500,21 @@ def haveAllGamesBeenPlayed():
 
         startNewGame()
 
+def setUpSnakesAndLaddersForCurrentBoard():
+
+    if boardLayout == 1:
+
+        setUpLaddersBoardOne()
+        setUpSnakesBoardOne()
+
+    elif boardLayout == 2:
+
+        setUpLaddersBoardTwo()
+        setUpSnakesBoardTwo()
+
+
+
 ###PROGRAM EXECUTION###
 
+setUpSnakesAndLaddersForCurrentBoard()
 startDiceRollsSelection() #Starts the program.
