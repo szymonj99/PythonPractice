@@ -302,7 +302,7 @@ def didGrannyLandOnSnakeOrLadder():
     print(Fore.WHITE)
 
 def youRandomRoll():
-    global playerDiceRollTotal, yourStartingPosition, yourCurrentPosition, currentDiceRoll, youDiceOneNumberOne, youDiceOneNumberTwo, youDiceTwoNumberOne, youDiceTwoNumberTwo
+    global yourDiceRollTotal, playerDiceRollTotal, yourStartingPosition, yourCurrentPosition, currentDiceRoll, youDiceOneNumberOne, youDiceOneNumberTwo, youDiceTwoNumberOne, youDiceTwoNumberTwo
     diceOneRandomSelection = random.randint(1,2)
     diceTwoRandomSelection = random.randint(1,2)
     print(Fore.GREEN)
