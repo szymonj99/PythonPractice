@@ -5,6 +5,7 @@ import time
 import math
 import sys
 import argparse
+import collections ###WILL BE USED TO COUNT FREQUENCY Of WHERE BOTH PLAYERS STOP.
 from colorama import Fore, Back, Style
 
 ######SETTING UP PARSER ARGUMENT######
@@ -32,6 +33,12 @@ gamesToPlay = args.gamesToPlay
 gamesYouWon = 0
 gamesGrannyWon = 0
 boardLayout = args.boardLayout
+
+######SETTING UP FREQUENCY LIST######
+#Sets up initially empty lists.
+
+grannyStoppedOnPosition = []
+youStoppedOnPosition = []
 
 ######SETTING UP SNAKES BOARD ONE######
 
@@ -329,6 +336,7 @@ def grannyRandomRoll():
 
 def didGrannyLandOnSnakeOrLadder():
     global grannyCurrentPosition, grannyLandedOnLadders, grannyLandedOnSnakes
+    grannyStoppedOnPosition.append(grannyCurrentPosition)
 
     if (grannyCurrentPosition == snakeOneStart):
         grannyCurrentPosition = snakeOneFinish
@@ -421,6 +429,7 @@ def youRandomRoll():
 
 def didYouLandOnSnakeOrLadder():
     global yourCurrentPosition, youLandedOnLadders, youLandedOnSnakes
+    youStoppedOnPosition.append(yourCurrentPosition) #Has to be calculated before stepping on a snake or ladder.
 
     if (yourCurrentPosition == snakeOneStart):
         yourCurrentPosition = snakeOneFinish
@@ -495,6 +504,10 @@ def haveAllGamesBeenPlayed():
 
         print("Games You Won:", gamesYouWon)
         print("Games Granny Won:", gamesGrannyWon)
+        grannyStoppedOnPositionCounter = collections.Counter(grannyStoppedOnPosition)
+        youStoppedOnPositionCounter = collections.Counter(youStoppedOnPosition)
+        print("Granny stopped on these positions:" , grannyStoppedOnPositionCounter)
+        print("you stopped on these positions:" , youStoppedOnPositionCounter)
 
     else:
 
