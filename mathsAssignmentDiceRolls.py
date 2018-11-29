@@ -199,7 +199,7 @@ def diceRollRandomisationDecision():
 def checkForWinner():
 
     if (grannyCurrentPosition >= 100):
-        print(Fore.RED)
+        print(Fore.MAGENTA)
         print("Granny Won!")
         print("Granny stepped on snakes" , grannyLandedOnSnakes , "times, and" , grannyLandedOnLadders , "times on ladders.")
         print("Granny Total Dice Rolls:" , grannyDiceRollTotal)
@@ -223,7 +223,7 @@ def grannyRandomRoll():
     global grannyDiceRollTotal, grannyStartingPosition, grannyCurrentPosition, currentDiceRoll, grannyDiceOneNumberOne, grannyDiceOneNumberTwo, grannyDiceTwoNumberOne, grannyDiceTwoNumberTwo
     diceOneRandomSelection = random.randint(1,2)
     diceTwoRandomSelection = random.randint(1,2)
-    print(Fore.RED)
+    print(Fore.MAGENTA)
 
     if (diceOneRandomSelection == 1 and diceTwoRandomSelection == 1):
         grannyTotal = grannyDiceOneNumberOne + grannyDiceTwoNumberOne
@@ -297,7 +297,7 @@ def didGrannyLandOnSnakeOrLadder():
         print("Granny landed on a ladder!" , ladderFourStart, "to" , ladderFourFinish)
         grannyLandedOnLadders += 1
 
-    print(Fore.RED)
+    print(Fore.MAGENTA)
     print("Granny is on position:" , grannyCurrentPosition)
     print(Fore.WHITE)
 
