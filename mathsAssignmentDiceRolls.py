@@ -28,8 +28,10 @@ snakeTwoStart = 27
 snakeTwoFinish = 15
 snakeThreeStart = 69
 snakeThreeFinish = 57
-snakeFourStart = 73
-snakeFourFinish = 44
+snakeFourStart = 75
+snakeFourFinish = 43
+snakeFiveStart = 94
+snakeFiveFinish = 76
 
 ######SETTING UP LADDERS######
 
@@ -39,8 +41,10 @@ ladderTwoStart = 45
 ladderTwoFinish = 55
 ladderThreeStart = 52
 ladderThreeFinish = 62
-ladderFourStart = 67
-ladderFourFinish = 77
+ladderFourStart = 63
+ladderFourFinish = 73
+ladderFiveStart = 77
+ladderFiveFinish = 87
 
 #####QUICK STRING USED FOR USER INPUT RECOGNITION#####
 
@@ -281,6 +285,11 @@ def didGrannyLandOnSnakeOrLadder():
         print("Granny landed on a snake!" , snakeFourStart, "to" , snakeFourFinish)
         grannyLandedOnSnakes += 1
 
+    if (grannyCurrentPosition == snakeFiveStart):
+        grannyCurrentPosition = snakeFiveFinish
+        print("Granny landed on a snake!" , snakeFiveStart, "to" , snakeFiveFinish)
+        grannyLandedOnSnakes += 1
+
     if (grannyCurrentPosition == ladderOneStart):
         grannyCurrentPosition = ladderOneFinish
         print("Granny landed on a ladder!" , ladderOneStart, "to" , ladderOneFinish)
@@ -299,6 +308,11 @@ def didGrannyLandOnSnakeOrLadder():
     if (grannyCurrentPosition == ladderFourStart):
         grannyCurrentPosition = ladderFourFinish
         print("Granny landed on a ladder!" , ladderFourStart, "to" , ladderFourFinish)
+        grannyLandedOnLadders += 1
+
+    if (grannyCurrentPosition == ladderFiveStart):
+        grannyCurrentPosition = ladderFiveFinish
+        print("Granny landed on a ladder!" , ladderFiveStart, "to" , ladderFiveFinish)
         grannyLandedOnLadders += 1
 
     print(Fore.MAGENTA)
@@ -363,6 +377,11 @@ def didYouLandOnSnakeOrLadder():
         print("You landed on a snake!" , snakeFourStart, "to" , snakeFourFinish)
         youLandedOnSnakes += 1
 
+    if (yourCurrentPosition == snakeFiveStart):
+        yourCurrentPosition = snakeFiveFinish
+        print("You landed on a snake!" , snakeFiveStart, "to" , snakeFiveFinish)
+        youLandedOnSnakes += 1
+
     if (yourCurrentPosition == ladderOneStart):
         yourCurrentPosition = ladderOneFinish
         print("You landed on a ladder!" , ladderOneStart, "to" , ladderOneFinish)
@@ -381,6 +400,11 @@ def didYouLandOnSnakeOrLadder():
     if (yourCurrentPosition == ladderFourStart):
         yourCurrentPosition = ladderFourFinish
         print("You landed on a ladder!" , ladderFourStart, "to" , ladderFourFinish)
+        youLandedOnLadders += 1
+
+    if (yourCurrentPosition == ladderFiveStart):
+        yourCurrentPosition = ladderFiveFinish
+        print("You landed on a ladder!" , ladderFiveStart, "to" , ladderFiveFinish)
         youLandedOnLadders += 1
 
     print(Fore.GREEN) #Changes terminal colour to green
