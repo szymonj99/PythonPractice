@@ -204,6 +204,8 @@ def checkForWinner():
         print("Granny stepped on snakes" , grannyLandedOnSnakes , "times, and" , grannyLandedOnLadders , "times on ladders.")
         print("Granny Total Dice Rolls:" , grannyDiceRollTotal)
         print("Your Dice Roll Total:" , yourDiceRollTotal)
+        print(Fore.GREEN)
+        print("You stepped on snakes" , youLandedOnSnakes , "times, and" , youLandedOnLadders , "times on ladders.")
         print(Fore.WHITE)
         sys.exit(2)
 
@@ -213,6 +215,8 @@ def checkForWinner():
         print("You stepped on snakes" , youLandedOnSnakes , "times, and" , youLandedOnLadders , "times on ladders.")
         print("Granny Total Dice Rolls:" , grannyDiceRollTotal)
         print("Your Dice Roll Total:" , yourDiceRollTotal)
+        print(Fore.MAGENTA)
+        print("Granny stepped on snakes" , grannyLandedOnSnakes , "times, and" , grannyLandedOnLadders , "times on ladders.")
         print(Fore.WHITE)
         sys.exit(2)
 
