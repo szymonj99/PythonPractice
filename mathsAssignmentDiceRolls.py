@@ -11,6 +11,7 @@ from colorama import Fore, Back, Style
 
 parser = argparse.ArgumentParser()
 parser.add_argument("gamesToPlay", help="How many games to play out?", type=int)
+parser.add_argument("boardLayout", help="Which board layout do you want?", type=int)
 args = parser.parse_args()
 
 ######SETTING GAME VARIABLES######
@@ -32,6 +33,10 @@ gamesYouWon = 0
 gamesGrannyWon = 0
 
 ######SETTING UP SNAKES######
+
+#Maths assignment needs to different boards.
+#Will set up a second board with different positions of snakes and ladders.
+#Boards will be decided by another argument maybe?
 
 snakeOneStart = 13
 snakeOneFinish = 7
@@ -461,7 +466,7 @@ def haveAllGamesBeenPlayed():
         print("Games Granny Won:", gamesGrannyWon)
 
     else:
-        
+
         startNewGame()
 
 ###PROGRAM EXECUTION###
