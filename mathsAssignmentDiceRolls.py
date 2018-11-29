@@ -512,8 +512,6 @@ def setUpSnakesAndLaddersForCurrentBoard():
         setUpLaddersBoardTwo()
         setUpSnakesBoardTwo()
 
-
-
 ###PROGRAM EXECUTION###
 
 setUpSnakesAndLaddersForCurrentBoard()
