@@ -4,6 +4,7 @@ import random
 import time
 import math
 import sys
+from colorama import Fore, Back, Style
 
 ######SETTING GAME VARIABLES######
 
@@ -198,17 +199,21 @@ def diceRollRandomisationDecision():
 def checkForWinner():
 
     if (grannyCurrentPosition >= 100):
+        print(Fore.RED)
         print("Granny Won!")
         print("Granny stepped on snakes" , grannyLandedOnSnakes , "times, and" , grannyLandedOnLadders , "times on ladders.")
         print("Granny Total Dice Rolls:" , grannyDiceRollTotal)
         print("Your Dice Roll Total:" , yourDiceRollTotal)
+        print(Fore.WHITE)
         sys.exit(2)
 
     elif (yourCurrentPosition >= 100):
+        print(Fore.GREEN)
         print("You won!")
         print("You stepped on snakes" , youLandedOnSnakes , "times, and" , youLandedOnLadders , "times on ladders.")
         print("Granny Total Dice Rolls:" , grannyDiceRollTotal)
         print("Your Dice Roll Total:" , yourDiceRollTotal)
+        print(Fore.WHITE)
         sys.exit(2)
 
     else:
@@ -218,6 +223,7 @@ def grannyRandomRoll():
     global grannyDiceRollTotal, grannyStartingPosition, grannyCurrentPosition, currentDiceRoll, grannyDiceOneNumberOne, grannyDiceOneNumberTwo, grannyDiceTwoNumberOne, grannyDiceTwoNumberTwo
     diceOneRandomSelection = random.randint(1,2)
     diceTwoRandomSelection = random.randint(1,2)
+    print(Fore.RED)
 
     if (diceOneRandomSelection == 1 and diceTwoRandomSelection == 1):
         grannyTotal = grannyDiceOneNumberOne + grannyDiceTwoNumberOne
@@ -243,6 +249,7 @@ def grannyRandomRoll():
         grannyCurrentPosition = grannyCurrentPosition + grannyTotal
         didGrannyLandOnSnakeOrLadder()
 
+    print(Fore.WHITE)
     grannyDiceRollTotal += 1
     currentDiceRoll += 1
     checkForWinner()
@@ -290,12 +297,15 @@ def didGrannyLandOnSnakeOrLadder():
         print("Granny landed on a ladder!" , ladderFourStart, "to" , ladderFourFinish)
         grannyLandedOnLadders += 1
 
+    print(Fore.RED)
     print("Granny is on position:" , grannyCurrentPosition)
+    print(Fore.WHITE)
 
 def youRandomRoll():
     global playerDiceRollTotal, yourStartingPosition, yourCurrentPosition, currentDiceRoll, youDiceOneNumberOne, youDiceOneNumberTwo, youDiceTwoNumberOne, youDiceTwoNumberTwo
     diceOneRandomSelection = random.randint(1,2)
     diceTwoRandomSelection = random.randint(1,2)
+    print(Fore.GREEN)
 
     if (diceOneRandomSelection == 1 and diceTwoRandomSelection == 1):
         yourTotal = youDiceOneNumberOne + youDiceTwoNumberOne
@@ -321,6 +331,7 @@ def youRandomRoll():
         yourCurrentPosition = yourCurrentPosition + yourTotal
         didYouLandOnSnakeOrLadder()
 
+    print(Fore.WHITE)
     yourDiceRollTotal += 1
     currentDiceRoll += 1
     checkForWinner()
@@ -368,7 +379,9 @@ def didYouLandOnSnakeOrLadder():
         print("You landed on a ladder!" , ladderFourStart, "to" , ladderFourFinish)
         youLandedOnLadders += 1
 
+    print(Fore.GREEN) #Changes terminal colour to green
     print("You are on position:" , yourCurrentPosition)
+    print(Fore.WHITE) #changes terminal colour to white
 
 ###PROGRAM EXECUTION###
 
