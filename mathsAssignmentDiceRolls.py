@@ -574,7 +574,7 @@ def haveAllGamesBeenPlayed():
         youStoppedOnPositionCounter = collections.Counter(youStoppedOnPosition)
         print("Granny stopped on these positions:" , grannyStoppedOnPositionCounter)
         print("Granny dice are:" , grannyDiceOneNumberOne , grannyDiceOneNumberTwo , grannyDiceTwoNumberOne , grannyDiceTwoNumberTwo)
-        print()
+        print(Fore.GREEN)
         print("You stopped on these positions:" , youStoppedOnPositionCounter)
         print("Your dice are:" , youDiceOneNumberOne , youDiceOneNumberTwo , youDiceTwoNumberOne , youDiceTwoNumberTwo)
 
