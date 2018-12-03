@@ -97,16 +97,16 @@ def setUpSnakesBoardOne():
 
 def setUpSnakesBoardTwo():
     global snakeOneStart, snakeOneFinish, snakeTwoStart, snakeTwoFinish, snakeThreeStart, snakeThreeFinish, snakeFourStart, snakeFourFinish, snakeFiveStart, snakeFiveFinish
-    snakeOneStart = 20
-    snakeOneFinish = 11
+    snakeOneStart = 0
+    snakeOneFinish = 0
     snakeTwoStart = 0
     snakeTwoFinish = 0
-    snakeThreeStart = 0
-    snakeThreeFinish = 0
+    snakeThreeStart = 57
+    snakeThreeFinish = 27
     snakeFourStart = 0
     snakeFourFinish = 0
-    snakeFiveStart = 89
-    snakeFiveFinish = 69
+    snakeFiveStart = 0
+    snakeFiveFinish = 0
 
 ######SETTING UP SNAKES BOARD THREE######
 
@@ -142,14 +142,14 @@ def setUpLaddersBoardOne():
 
 def setUpLaddersBoardTwo():
     global ladderOneStart, ladderOneFinish, ladderTwoStart, ladderTwoFinish, ladderThreeStart, ladderThreeFinish, ladderFourStart, ladderFourFinish, ladderFiveStart, ladderFiveFinish
-    ladderOneStart = 0
-    ladderOneFinish = 0
+    ladderOneStart = 60
+    ladderOneFinish = 89
     ladderTwoStart = 0
     ladderTwoFinish = 0
     ladderThreeStart = 0
     ladderThreeFinish = 0
-    ladderFourStart = 58
-    ladderFourFinish = 80
+    ladderFourStart = 0
+    ladderFourFinish = 0
     ladderFiveStart = 0
     ladderFiveFinish = 0
 
@@ -343,8 +343,8 @@ def checkForWinner():
         print("Granny Won!")
         print("Granny stepped on snakes" , grannyLandedOnSnakes , "times, and" , grannyLandedOnLadders , "times on ladders.")
         print("Granny Total Dice Rolls:" , grannyDiceRollTotal)
-        print("Your Dice Roll Total:" , yourDiceRollTotal)
         print(Fore.GREEN)
+        print("Your Dice Roll Total:" , yourDiceRollTotal)
         print("You stepped on snakes" , youLandedOnSnakes , "times, and" , youLandedOnLadders , "times on ladders.")
         print(Fore.WHITE)
         haveAllGamesBeenPlayed() 
@@ -356,10 +356,9 @@ def checkForWinner():
         print(Fore.GREEN)
         print("You won!")
         print("You stepped on snakes" , youLandedOnSnakes , "times, and" , youLandedOnLadders , "times on ladders.")
-        print("Granny Total Dice Rolls:" , grannyDiceRollTotal)
-        print("Your Dice Roll Total:" , yourDiceRollTotal)
-        print(Fore.MAGENTA)
-        print("Granny stepped on snakes" , grannyLandedOnSnakes , "times, and" , grannyLandedOnLadders , "times on ladders.")
+        print(Fore.MAGENTA + "Granny Total Dice Rolls:" , grannyDiceRollTotal)
+        print(Fore.GREEN + "Your Dice Roll Total:" , yourDiceRollTotal)        
+        print(Fore.MAGENTA + "Granny stepped on snakes" , grannyLandedOnSnakes , "times, and" , grannyLandedOnLadders , "times on ladders.")
         print(Fore.WHITE)
         haveAllGamesBeenPlayed()
 #        sys.exit(2)
