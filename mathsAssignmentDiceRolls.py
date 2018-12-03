@@ -8,6 +8,8 @@ import argparse
 import collections ###WILL BE USED TO COUNT FREQUENCY Of WHERE BOTH PLAYERS STOP.
 from colorama import Fore, Back, Style
 
+sys.setrecursionlimit(3500) #Only here for testing many games being played out at once.
+
 ######SETTING UP PARSER ARGUMENT######
 
 parser = argparse.ArgumentParser()
@@ -34,71 +36,118 @@ gamesYouWon = 0
 gamesGrannyWon = 0
 boardLayout = args.boardLayout
 
+######ARGUMENTS CHECK######
+
+def checkIfArgumentsAreCorrect():
+
+    if (gamesToPlay <= 0):
+        print(Fore.RED + "Games to play cannot be less than or equal to 0." + Fore.WHITE)
+        sys.exit(2)
+
+    if (boardLayout != 1) and (boardLayout != 2):
+        print(Fore.RED + "The board layout must be 1 or 2." + Fore.WHITE)
+        sys.exit(2)
+
 ######SETTING UP FREQUENCY LIST######
 #Sets up initially empty lists.
 
 grannyStoppedOnPosition = []
 youStoppedOnPosition = []
 
+#Example board usage:
+#Board 1: Blank, used for testing dice.
+#Board two: Used to rig snakes and ladders
+#Board three: backup of previous attempts.
+
 ######SETTING UP SNAKES BOARD ONE######
 
 def setUpSnakesBoardOne():
     global snakeOneStart, snakeOneFinish, snakeTwoStart, snakeTwoFinish, snakeThreeStart, snakeThreeFinish, snakeFourStart, snakeFourFinish, snakeFiveStart, snakeFiveFinish
-    snakeOneStart = 13
-    snakeOneFinish = 7
-    snakeTwoStart = 27
-    snakeTwoFinish = 15
-    snakeThreeStart = 69
-    snakeThreeFinish = 57
-    snakeFourStart = 75
-    snakeFourFinish = 43
-    snakeFiveStart = 94
-    snakeFiveFinish = 76
+    snakeOneStart = 0
+    snakeOneFinish = 0
+    snakeTwoStart = 0
+    snakeTwoFinish = 0
+    snakeThreeStart = 0
+    snakeThreeFinish = 0
+    snakeFourStart = 0
+    snakeFourFinish = 0
+    snakeFiveStart = 0 
+    snakeFiveFinish = 0 
 
 ######SETTING UP SNAKES BOARD TWO######
 
 def setUpSnakesBoardTwo():
     global snakeOneStart, snakeOneFinish, snakeTwoStart, snakeTwoFinish, snakeThreeStart, snakeThreeFinish, snakeFourStart, snakeFourFinish, snakeFiveStart, snakeFiveFinish
-    snakeOneStart = 13
-    snakeOneFinish = 7
-    snakeTwoStart = 27
-    snakeTwoFinish = 15
-    snakeThreeStart = 69
-    snakeThreeFinish = 57
-    snakeFourStart = 75
-    snakeFourFinish = 43
-    snakeFiveStart = 94
-    snakeFiveFinish = 76
+    snakeOneStart = 0
+    snakeOneFinish = 0
+    snakeTwoStart = 0
+    snakeTwoFinish = 0
+    snakeThreeStart = 0
+    snakeThreeFinish = 0
+    snakeFourStart = 0
+    snakeFourFinish = 0
+    snakeFiveStart = 0
+    snakeFiveFinish = 0
+
+######SETTING UP SNAKES BOARD THREE######
+
+def setUpSnakesBoardThree():
+    global snakeOneStart, snakeOneFinish, snakeTwoStart, snakeTwoFinish, snakeThreeStart, snakeThreeFinish, snakeFourStart, snakeFourFinish, snakeFiveStart, snakeFiveFinish
+    snakeOneStart = 63
+    snakeOneFinish = 37
+    snakeTwoStart = 0
+    snakeTwoFinish = 0
+    snakeThreeStart = 0
+    snakeThreeFinish = 0
+    snakeFourStart = 0
+    snakeFourFinish = 0
+    snakeFiveStart = 0
+    snakeFiveFinish = 0
 
 ######SETTING UP LADDERS BOARD ONE######
 
 def setUpLaddersBoardOne():
     global ladderOneStart, ladderOneFinish, ladderTwoStart, ladderTwoFinish, ladderThreeStart, ladderThreeFinish, ladderFourStart, ladderFourFinish, ladderFiveStart, ladderFiveFinish
-    ladderOneStart = 18
-    ladderOneFinish = 38
-    ladderTwoStart = 45
-    ladderTwoFinish = 55
-    ladderThreeStart = 52
-    ladderThreeFinish = 62
-    ladderFourStart = 63
-    ladderFourFinish = 73
-    ladderFiveStart = 77
-    ladderFiveFinish = 87
+    ladderOneStart = 0
+    ladderOneFinish = 0
+    ladderTwoStart = 0
+    ladderTwoFinish = 0
+    ladderThreeStart = 0
+    ladderThreeFinish = 0
+    ladderFourStart = 0
+    ladderFourFinish = 0
+    ladderFiveStart = 0
+    ladderFiveFinish = 0
 
-######SETTING UP LADDERS BOARD ONE######
+######SETTING UP LADDERS BOARD TWO######
 
 def setUpLaddersBoardTwo():
-    global ladderOneStart, ladderOnefinish, ladderTwoStart, ladderTwoFinish, ladderThreeStart, ladderThreeFinish, ladderFourStart, ladderFourFinish, ladderFiveStart, ladderFiveFinish
-    ladderOneStart = 18
-    ladderOneFinish = 38
-    ladderTwoStart = 45
-    ladderTwoFinish = 55
-    ladderThreeStart = 52
-    ladderThreeFinish = 62
-    ladderFourStart = 63
-    ladderFourFinish = 73
-    ladderFiveStart = 77
-    ladderFiveFinish = 87
+    global ladderOneStart, ladderOneFinish, ladderTwoStart, ladderTwoFinish, ladderThreeStart, ladderThreeFinish, ladderFourStart, ladderFourFinish, ladderFiveStart, ladderFiveFinish
+    ladderOneStart = 0
+    ladderOneFinish = 0
+    ladderTwoStart = 0
+    ladderTwoFinish = 0
+    ladderThreeStart = 0
+    ladderThreeFinish = 0
+    ladderFourStart = 0
+    ladderFourFinish = 0
+    ladderFiveStart = 0
+    ladderFiveFinish = 0
+
+######SETTING UP LADDERS BOARD THREE######
+
+def setUpLaddersBoardThree():
+    global ladderOneStart, ladderOneFinish, ladderTwoStart, ladderTwoFinish, ladderThreeStart, ladderThreeFinish, ladderFourStart, ladderFourFinish, ladderFiveStart, ladderFiveFinish
+    ladderOneStart = 15
+    ladderOneFinish = 34
+    ladderTwoStart = 62
+    ladderTwoFinish = 76
+    ladderThreeStart = 23
+    ladderThreeFinish = 43
+    ladderFourStart = 39
+    ladderFourFinish = 57
+    ladderFiveStart = 8
+    ladderFiveFinish = 38
 
 #####QUICK STRING USED FOR USER INPUT RECOGNITION#####
 
@@ -303,33 +352,33 @@ def grannyRandomRoll():
     global grannyDiceRollTotal, grannyStartingPosition, grannyCurrentPosition, currentDiceRoll, grannyDiceOneNumberOne, grannyDiceOneNumberTwo, grannyDiceTwoNumberOne, grannyDiceTwoNumberTwo
     diceOneRandomSelection = random.randint(1,2)
     diceTwoRandomSelection = random.randint(1,2)
-    print(Fore.MAGENTA)
+#    print(Fore.MAGENTA)
 
     if (diceOneRandomSelection == 1 and diceTwoRandomSelection == 1):
         grannyTotal = grannyDiceOneNumberOne + grannyDiceTwoNumberOne
-        print("Granny rolled:" , grannyTotal)
+#        print("Granny rolled:" , grannyTotal)
         grannyCurrentPosition = grannyCurrentPosition + grannyTotal
         didGrannyLandOnSnakeOrLadder()
 
     if (diceOneRandomSelection == 1 and diceTwoRandomSelection == 2):
         grannyTotal = grannyDiceOneNumberOne + grannyDiceTwoNumberTwo
-        print("Granny rolled:" , grannyTotal)
+#        print("Granny rolled:" , grannyTotal)
         grannyCurrentPosition = grannyCurrentPosition + grannyTotal
         didGrannyLandOnSnakeOrLadder()
 
     if (diceOneRandomSelection == 2 and diceTwoRandomSelection == 1):
         grannyTotal = grannyDiceOneNumberTwo + grannyDiceTwoNumberOne
-        print("Granny rolled:" , grannyTotal)
+#        print("Granny rolled:" , grannyTotal)
         grannyCurrentPosition = grannyCurrentPosition + grannyTotal
         didGrannyLandOnSnakeOrLadder()
 
     if (diceOneRandomSelection == 2 and diceTwoRandomSelection == 2):
         grannyTotal = grannyDiceOneNumberTwo + grannyDiceTwoNumberTwo
-        print("Granny rolled:" , grannyTotal)
+#        print("Granny rolled:" , grannyTotal)
         grannyCurrentPosition = grannyCurrentPosition + grannyTotal
         didGrannyLandOnSnakeOrLadder()
 
-    print(Fore.WHITE)
+#    print(Fore.WHITE)
     grannyDiceRollTotal += 1
     currentDiceRoll += 1
     checkForWinner()
@@ -340,89 +389,89 @@ def didGrannyLandOnSnakeOrLadder():
 
     if (grannyCurrentPosition == snakeOneStart):
         grannyCurrentPosition = snakeOneFinish
-        print("Granny landed on a snake!" , snakeOneStart, "to" , snakeOneFinish)
+#        print("Granny landed on a snake!" , snakeOneStart, "to" , snakeOneFinish)
         grannyLandedOnSnakes += 1
     
     if (grannyCurrentPosition == snakeTwoStart):
         grannyCurrentPosition = snakeTwoFinish
-        print("Granny landed on a snake!" , snakeTwoStart, "to" , snakeTwoFinish)
+#        print("Granny landed on a snake!" , snakeTwoStart, "to" , snakeTwoFinish)
         grannyLandedOnSnakes += 1
 
     if (grannyCurrentPosition == snakeThreeStart):
         grannyCurrentPosition = snakeThreeFinish
-        print("Granny landed on a snake!" , snakeThreeStart, "to" , snakeThreeFinish)
+#        print("Granny landed on a snake!" , snakeThreeStart, "to" , snakeThreeFinish)
         grannyLandedOnSnakes += 1
 
     if (grannyCurrentPosition == snakeFourStart):
         grannyCurrentPosition = snakeFourFinish
-        print("Granny landed on a snake!" , snakeFourStart, "to" , snakeFourFinish)
+#        print("Granny landed on a snake!" , snakeFourStart, "to" , snakeFourFinish)
         grannyLandedOnSnakes += 1
 
     if (grannyCurrentPosition == snakeFiveStart):
         grannyCurrentPosition = snakeFiveFinish
-        print("Granny landed on a snake!" , snakeFiveStart, "to" , snakeFiveFinish)
+#        print("Granny landed on a snake!" , snakeFiveStart, "to" , snakeFiveFinish)
         grannyLandedOnSnakes += 1
 
     if (grannyCurrentPosition == ladderOneStart):
         grannyCurrentPosition = ladderOneFinish
-        print("Granny landed on a ladder!" , ladderOneStart, "to" , ladderOneFinish)
+#        print("Granny landed on a ladder!" , ladderOneStart, "to" , ladderOneFinish)
         grannyLandedOnLadders += 1
 
     if (grannyCurrentPosition == ladderTwoStart):
         grannyCurrentPosition = ladderTwoFinish
-        print("Granny landed on a ladder!" , ladderTwoStart, "to" , ladderTwoFinish)
+#        print("Granny landed on a ladder!" , ladderTwoStart, "to" , ladderTwoFinish)
         grannyLandedOnLadders += 1
 
     if (grannyCurrentPosition == ladderThreeStart):
         grannyCurrentPosition = ladderThreeFinish
-        print("Granny landed on a ladder!" , ladderThreeStart, "to" , ladderThreeFinish)
+#        print("Granny landed on a ladder!" , ladderThreeStart, "to" , ladderThreeFinish)
         grannyLandedOnLadders += 1
     
     if (grannyCurrentPosition == ladderFourStart):
         grannyCurrentPosition = ladderFourFinish
-        print("Granny landed on a ladder!" , ladderFourStart, "to" , ladderFourFinish)
+#        print("Granny landed on a ladder!" , ladderFourStart, "to" , ladderFourFinish)
         grannyLandedOnLadders += 1
 
     if (grannyCurrentPosition == ladderFiveStart):
         grannyCurrentPosition = ladderFiveFinish
-        print("Granny landed on a ladder!" , ladderFiveStart, "to" , ladderFiveFinish)
+#        print("Granny landed on a ladder!" , ladderFiveStart, "to" , ladderFiveFinish)
         grannyLandedOnLadders += 1
 
-    print(Fore.MAGENTA)
-    print("Granny is on position:" , grannyCurrentPosition)
-    print(Fore.WHITE)
+#    print(Fore.MAGENTA)
+#    print("Granny is on position:" , grannyCurrentPosition)
+#    print(Fore.WHITE)
 
 def youRandomRoll():
     global yourDiceRollTotal, playerDiceRollTotal, yourStartingPosition, yourCurrentPosition, currentDiceRoll, youDiceOneNumberOne, youDiceOneNumberTwo, youDiceTwoNumberOne, youDiceTwoNumberTwo
     diceOneRandomSelection = random.randint(1,2)
     diceTwoRandomSelection = random.randint(1,2)
-    print(Fore.GREEN)
+#    print(Fore.GREEN)
 
     if (diceOneRandomSelection == 1 and diceTwoRandomSelection == 1):
         yourTotal = youDiceOneNumberOne + youDiceTwoNumberOne
-        print("You rolled:" , yourTotal)
+#        print("You rolled:" , yourTotal)
         yourCurrentPosition = yourCurrentPosition + yourTotal
         didYouLandOnSnakeOrLadder()
 
     if (diceOneRandomSelection == 1 and diceTwoRandomSelection == 2):
         yourTotal = youDiceOneNumberOne + youDiceTwoNumberTwo
-        print("You rolled:" , yourTotal)
+#        print("You rolled:" , yourTotal)
         yourCurrentPosition = yourCurrentPosition + yourTotal
         didYouLandOnSnakeOrLadder()
 
     if (diceOneRandomSelection == 2 and diceTwoRandomSelection == 1):
         yourTotal = youDiceOneNumberTwo + youDiceTwoNumberOne
-        print("You rolled:" , yourTotal)
+#        print("You rolled:" , yourTotal)
         yourCurrentPosition = yourCurrentPosition + yourTotal
         didYouLandOnSnakeOrLadder()
 
     if (diceOneRandomSelection == 2 and diceTwoRandomSelection == 2):
         yourTotal = youDiceOneNumberTwo + youDiceTwoNumberTwo
-        print("You rolled:" , yourTotal)
+#        print("You rolled:" , yourTotal)
         yourCurrentPosition = yourCurrentPosition + yourTotal
         didYouLandOnSnakeOrLadder()
 
-    print(Fore.WHITE)
+#    print(Fore.WHITE)
     yourDiceRollTotal += 1
     currentDiceRoll += 1
     checkForWinner()
@@ -433,57 +482,57 @@ def didYouLandOnSnakeOrLadder():
 
     if (yourCurrentPosition == snakeOneStart):
         yourCurrentPosition = snakeOneFinish
-        print("You landed on a snake!" , snakeOneStart, "to" , snakeOneFinish)
+#        print("You landed on a snake!" , snakeOneStart, "to" , snakeOneFinish)
         youLandedOnSnakes += 1
     
     if (yourCurrentPosition == snakeTwoStart):
         yourCurrentPosition = snakeTwoFinish
-        print("You landed on a snake!" , snakeTwoStart, "to" , snakeTwoFinish)
+#        print("You landed on a snake!" , snakeTwoStart, "to" , snakeTwoFinish)
         youLandedOnSnakes += 1
 
     if (yourCurrentPosition == snakeThreeStart):
         yourCurrentPosition = snakeThreeFinish
-        print("You landed on a snake!" , snakeThreeStart, "to" , snakeThreeFinish)
+#        print("You landed on a snake!" , snakeThreeStart, "to" , snakeThreeFinish)
         youLandedOnSnakes += 1
 
     if (yourCurrentPosition == snakeFourStart):
         yourCurrentPosition = snakeFourFinish
-        print("You landed on a snake!" , snakeFourStart, "to" , snakeFourFinish)
+#        print("You landed on a snake!" , snakeFourStart, "to" , snakeFourFinish)
         youLandedOnSnakes += 1
 
     if (yourCurrentPosition == snakeFiveStart):
         yourCurrentPosition = snakeFiveFinish
-        print("You landed on a snake!" , snakeFiveStart, "to" , snakeFiveFinish)
+#        print("You landed on a snake!" , snakeFiveStart, "to" , snakeFiveFinish)
         youLandedOnSnakes += 1
 
     if (yourCurrentPosition == ladderOneStart):
         yourCurrentPosition = ladderOneFinish
-        print("You landed on a ladder!" , ladderOneStart, "to" , ladderOneFinish)
+#        print("You landed on a ladder!" , ladderOneStart, "to" , ladderOneFinish)
         youLandedOnLadders += 1
 
     if (yourCurrentPosition == ladderTwoStart):
         yourCurrentPosition = ladderTwoFinish
-        print("You landed on a ladder!" , ladderTwoStart, "to" , ladderTwoFinish)
+#        print("You landed on a ladder!" , ladderTwoStart, "to" , ladderTwoFinish)
         youLandedOnLadders += 1
 
     if (yourCurrentPosition == ladderThreeStart):
         yourCurrentPosition = ladderThreeFinish
-        print("You landed on a ladder!" , ladderThreeStart, "to" , ladderThreeFinish)
+#        print("You landed on a ladder!" , ladderThreeStart, "to" , ladderThreeFinish)
         youLandedOnLadders += 1
     
     if (yourCurrentPosition == ladderFourStart):
         yourCurrentPosition = ladderFourFinish
-        print("You landed on a ladder!" , ladderFourStart, "to" , ladderFourFinish)
+#        print("You landed on a ladder!" , ladderFourStart, "to" , ladderFourFinish)
         youLandedOnLadders += 1
 
     if (yourCurrentPosition == ladderFiveStart):
         yourCurrentPosition = ladderFiveFinish
-        print("You landed on a ladder!" , ladderFiveStart, "to" , ladderFiveFinish)
+#        print("You landed on a ladder!" , ladderFiveStart, "to" , ladderFiveFinish)
         youLandedOnLadders += 1
 
-    print(Fore.GREEN) #Changes terminal colour to green
-    print("You are on position:" , yourCurrentPosition)
-    print(Fore.WHITE) #changes terminal colour to white
+#    print(Fore.GREEN) #Changes terminal colour to green
+#    print("You are on position:" , yourCurrentPosition)
+#    print(Fore.WHITE) #changes terminal colour to white
 
 def startNewGame():
     global currentDiceRoll, grannyCurrentPosition, yourCurrentPosition, grannyLandedOnSnakes, grannyLandedOnLadders, youLandedOnSnakes, youLandedOnLadders, yourDiceRollTotal, grannyDiceRollTotal
@@ -507,7 +556,9 @@ def haveAllGamesBeenPlayed():
         grannyStoppedOnPositionCounter = collections.Counter(grannyStoppedOnPosition)
         youStoppedOnPositionCounter = collections.Counter(youStoppedOnPosition)
         print("Granny stopped on these positions:" , grannyStoppedOnPositionCounter)
-        print("you stopped on these positions:" , youStoppedOnPositionCounter)
+        print("Granny dice are:" , grannyDiceOneNumberOne , grannyDiceOneNumberTwo , grannyDiceTwoNumberOne , grannyDiceTwoNumberTwo)
+        print("You stopped on these positions:" , youStoppedOnPositionCounter)
+        print("Your dice are:" , youDiceOneNumberOne , youDiceOneNumberTwo , youDiceTwoNumberOne , youDiceTwoNumberTwo)
 
     else:
 
@@ -525,7 +576,13 @@ def setUpSnakesAndLaddersForCurrentBoard():
         setUpLaddersBoardTwo()
         setUpSnakesBoardTwo()
 
+    elif boardLayout == 3:
+
+        setUpLaddersBoardThree()
+        setUpSnakesBoardThree()
+
 ###PROGRAM EXECUTION###
 
+checkIfArgumentsAreCorrect()
 setUpSnakesAndLaddersForCurrentBoard()
 startDiceRollsSelection() #Starts the program.
