@@ -8,7 +8,7 @@ import argparse
 import collections ###WILL BE USED TO COUNT FREQUENCY Of WHERE BOTH PLAYERS STOP.
 from colorama import Fore, Back, Style
 
-sys.setrecursionlimit(3500) #Only here for testing many games being played out at once.
+sys.setrecursionlimit(4000) #Only here for testing many games being played out at once.
 
 ######SETTING UP PARSER ARGUMENT######
 
@@ -97,16 +97,16 @@ def setUpSnakesBoardOne():
 
 def setUpSnakesBoardTwo():
     global snakeOneStart, snakeOneFinish, snakeTwoStart, snakeTwoFinish, snakeThreeStart, snakeThreeFinish, snakeFourStart, snakeFourFinish, snakeFiveStart, snakeFiveFinish
-    snakeOneStart = 0
-    snakeOneFinish = 0
-    snakeTwoStart = 0
-    snakeTwoFinish = 0
+    snakeOneStart = 37
+    snakeOneFinish = 15
+    snakeTwoStart = 41
+    snakeTwoFinish = 17
     snakeThreeStart = 57
     snakeThreeFinish = 27
-    snakeFourStart = 0
-    snakeFourFinish = 0
-    snakeFiveStart = 0
-    snakeFiveFinish = 0
+    snakeFourStart = 25
+    snakeFourFinish = 9
+    snakeFiveStart = 35
+    snakeFiveFinish = 11
 
 ######SETTING UP SNAKES BOARD THREE######
 
@@ -144,12 +144,12 @@ def setUpLaddersBoardTwo():
     global ladderOneStart, ladderOneFinish, ladderTwoStart, ladderTwoFinish, ladderThreeStart, ladderThreeFinish, ladderFourStart, ladderFourFinish, ladderFiveStart, ladderFiveFinish
     ladderOneStart = 60
     ladderOneFinish = 89
-    ladderTwoStart = 0
-    ladderTwoFinish = 0
-    ladderThreeStart = 0
-    ladderThreeFinish = 0
-    ladderFourStart = 0
-    ladderFourFinish = 0
+    ladderTwoStart = 20
+    ladderTwoFinish = 40
+    ladderThreeStart = 17
+    ladderThreeFinish = 27
+    ladderFourStart = 19
+    ladderFourFinish = 31
     ladderFiveStart = 0
     ladderFiveFinish = 0
 
@@ -343,8 +343,7 @@ def checkForWinner():
         print("Granny Won!")
         print("Granny stepped on snakes" , grannyLandedOnSnakes , "times, and" , grannyLandedOnLadders , "times on ladders.")
         print("Granny Total Dice Rolls:" , grannyDiceRollTotal)
-        print(Fore.GREEN)
-        print("Your Dice Roll Total:" , yourDiceRollTotal)
+        print(Fore.GREEN + "Your Dice Roll Total:" , yourDiceRollTotal)
         print("You stepped on snakes" , youLandedOnSnakes , "times, and" , youLandedOnLadders , "times on ladders.")
         print(Fore.WHITE)
         haveAllGamesBeenPlayed() 
@@ -353,11 +352,10 @@ def checkForWinner():
     elif (yourCurrentPosition >= 100):
         currentGame += 1
         gamesYouWon += 1
-        print(Fore.GREEN)
-        print("You won!")
+        print(Fore.GREEN + "You won!")
         print("You stepped on snakes" , youLandedOnSnakes , "times, and" , youLandedOnLadders , "times on ladders.")
-        print(Fore.MAGENTA + "Granny Total Dice Rolls:" , grannyDiceRollTotal)
-        print(Fore.GREEN + "Your Dice Roll Total:" , yourDiceRollTotal)        
+        print(Fore.GREEN + "Your Dice Roll Total:" , yourDiceRollTotal)
+        print(Fore.MAGENTA + "Granny Total Dice Rolls:" , grannyDiceRollTotal)    
         print(Fore.MAGENTA + "Granny stepped on snakes" , grannyLandedOnSnakes , "times, and" , grannyLandedOnLadders , "times on ladders.")
         print(Fore.WHITE)
         haveAllGamesBeenPlayed()
@@ -569,12 +567,14 @@ def haveAllGamesBeenPlayed():
 
     if (currentGame > gamesToPlay):
 
-        print("Games You Won:", gamesYouWon)
-        print("Games Granny Won:", gamesGrannyWon)
+        print(Fore.GREEN + "Games You Won:", gamesYouWon)
+        print(Fore.MAGENTA + "Games Granny Won:", gamesGrannyWon)
+        print()
         grannyStoppedOnPositionCounter = collections.Counter(grannyStoppedOnPosition)
         youStoppedOnPositionCounter = collections.Counter(youStoppedOnPosition)
         print("Granny stopped on these positions:" , grannyStoppedOnPositionCounter)
         print("Granny dice are:" , grannyDiceOneNumberOne , grannyDiceOneNumberTwo , grannyDiceTwoNumberOne , grannyDiceTwoNumberTwo)
+        print()
         print("You stopped on these positions:" , youStoppedOnPositionCounter)
         print("Your dice are:" , youDiceOneNumberOne , youDiceOneNumberTwo , youDiceTwoNumberOne , youDiceTwoNumberTwo)
 
