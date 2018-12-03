@@ -15,6 +15,14 @@ sys.setrecursionlimit(3500) #Only here for testing many games being played out a
 parser = argparse.ArgumentParser()
 parser.add_argument("gamesToPlay", help="How many games to play out?", type=int)
 parser.add_argument("boardLayout", help="Which board layout do you want?", type=int)
+parser.add_argument("grannyArgumentDiceOneNumberOne", help="Granny Dice 1 , Number 1.", type=int)
+parser.add_argument("grannyArgumentDiceOneNumberTwo", help="Granny Dice 1 , Number 2.", type=int)
+parser.add_argument("grannyArgumentDiceTwoNumberOne", help="Granny Dice 2 , Number 1.", type=int)
+parser.add_argument("grannyArgumentDiceTwoNumberTwo", help="Granny Dice 2 , Number 2.", type=int)
+parser.add_argument("yourArgumentDiceOneNumberOne", help="Your Dice 1 , Number 1.", type=int)
+parser.add_argument("yourArgumentDiceOneNumberTwo", help="Your Dice 1 , Number 1.", type=int)
+parser.add_argument("yourArgumentDiceTwoNumberOne", help="Your Dice 1 , Number 1.", type=int)
+parser.add_argument("yourArgumentDiceTwoNumberTwo", help="Your Dice 1 , Number 1.", type=int)
 args = parser.parse_args()
 
 ######SETTING GAME VARIABLES######
@@ -35,6 +43,17 @@ gamesToPlay = args.gamesToPlay
 gamesYouWon = 0
 gamesGrannyWon = 0
 boardLayout = args.boardLayout
+
+######LOTS OF REPEATED CODE. USED TO CHECK IF ANY ARE EMPTY.######
+
+grannyArgOne = args.grannyArgumentDiceOneNumberOne
+grannyArgTwo = args.grannyArgumentDiceOneNumberTwo
+grannyArgThree = args.grannyArgumentDiceTwoNumberOne
+grannyArgFour = args.grannyArgumentDiceTwoNumberTwo
+yourArgOne = args.yourArgumentDiceOneNumberOne
+yourArgTwo = args.yourArgumentDiceOneNumberTwo
+yourArgThree = args.yourArgumentDiceTwoNumberOne
+yourArgFour = args.yourArgumentDiceTwoNumberTwo
 
 ######ARGUMENTS CHECK######
 
@@ -78,16 +97,16 @@ def setUpSnakesBoardOne():
 
 def setUpSnakesBoardTwo():
     global snakeOneStart, snakeOneFinish, snakeTwoStart, snakeTwoFinish, snakeThreeStart, snakeThreeFinish, snakeFourStart, snakeFourFinish, snakeFiveStart, snakeFiveFinish
-    snakeOneStart = 0
-    snakeOneFinish = 0
+    snakeOneStart = 20
+    snakeOneFinish = 11
     snakeTwoStart = 0
     snakeTwoFinish = 0
     snakeThreeStart = 0
     snakeThreeFinish = 0
     snakeFourStart = 0
     snakeFourFinish = 0
-    snakeFiveStart = 0
-    snakeFiveFinish = 0
+    snakeFiveStart = 89
+    snakeFiveFinish = 69
 
 ######SETTING UP SNAKES BOARD THREE######
 
@@ -129,8 +148,8 @@ def setUpLaddersBoardTwo():
     ladderTwoFinish = 0
     ladderThreeStart = 0
     ladderThreeFinish = 0
-    ladderFourStart = 0
-    ladderFourFinish = 0
+    ladderFourStart = 58
+    ladderFourFinish = 80
     ladderFiveStart = 0
     ladderFiveFinish = 0
 
@@ -583,6 +602,35 @@ def setUpSnakesAndLaddersForCurrentBoard():
 
 ###PROGRAM EXECUTION###
 
-checkIfArgumentsAreCorrect()
+checkIfArgumentsAreCorrect() 
 setUpSnakesAndLaddersForCurrentBoard()
-startDiceRollsSelection() #Starts the program.
+
+######CHECK IF DICE ARGUMENTS ARE MISSING/INCORRECT######
+#Definitely not optimal...
+
+correctGrannyDiceArguments = True if (
+grannyArgOne >= 1 and grannyArgOne <= 6 and \
+grannyArgTwo >= 1 and grannyArgTwo <= 6 and \
+grannyArgThree >= 1 and grannyArgThree <= 6 and \
+grannyArgFour >= 1 and grannyArgFour <= 6) else False
+
+correctYourDiceArguments = True if (
+yourArgOne >= 1 and yourArgOne <= 6 and \
+yourArgTwo >= 1 and yourArgTwo <= 6 and \
+yourArgThree >= 1 and yourArgThree <= 6 and \
+yourArgFour >= 1 and yourArgFour <= 6) else False
+
+if  correctGrannyDiceArguments == True and correctYourDiceArguments == True:
+
+    grannyDiceOneNumberOne = grannyArgOne
+    grannyDiceOneNumberTwo = grannyArgTwo
+    grannyDiceTwoNumberOne = grannyArgThree
+    grannyDiceTwoNumberTwo = grannyArgFour
+    youDiceOneNumberOne = yourArgOne
+    youDiceOneNumberTwo = yourArgTwo
+    youDiceTwoNumberOne = yourArgThree
+    youDiceTwoNumberTwo = yourArgFour
+    diceRollRandomisationDecision()
+
+else:
+    startDiceRollsSelection() #Starts the program.
