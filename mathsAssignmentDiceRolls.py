@@ -82,6 +82,21 @@ youStoppedOnPosition = []
 
 def setUpSnakesBoardOne():
     global snakeOneStart, snakeOneFinish, snakeTwoStart, snakeTwoFinish, snakeThreeStart, snakeThreeFinish, snakeFourStart, snakeFourFinish, snakeFiveStart, snakeFiveFinish
+    snakeOneStart = 7
+    snakeOneFinish = 1
+    snakeTwoStart = 41
+    snakeTwoFinish = 17
+    snakeThreeStart = 31
+    snakeThreeFinish = 19
+    snakeFourStart = 23
+    snakeFourFinish = 11
+    snakeFiveStart = 68 
+    snakeFiveFinish = 50
+
+######SETTING UP SNAKES BOARD TWO######
+
+def setUpSnakesBoardTwo():
+    global snakeOneStart, snakeOneFinish, snakeTwoStart, snakeTwoFinish, snakeThreeStart, snakeThreeFinish, snakeFourStart, snakeFourFinish, snakeFiveStart, snakeFiveFinish
     snakeOneStart = 0
     snakeOneFinish = 0
     snakeTwoStart = 0
@@ -90,30 +105,15 @@ def setUpSnakesBoardOne():
     snakeThreeFinish = 0
     snakeFourStart = 0
     snakeFourFinish = 0
-    snakeFiveStart = 0 
-    snakeFiveFinish = 0 
-
-######SETTING UP SNAKES BOARD TWO######
-
-def setUpSnakesBoardTwo():
-    global snakeOneStart, snakeOneFinish, snakeTwoStart, snakeTwoFinish, snakeThreeStart, snakeThreeFinish, snakeFourStart, snakeFourFinish, snakeFiveStart, snakeFiveFinish
-    snakeOneStart = 37
-    snakeOneFinish = 15
-    snakeTwoStart = 41
-    snakeTwoFinish = 17
-    snakeThreeStart = 57
-    snakeThreeFinish = 27
-    snakeFourStart = 25
-    snakeFourFinish = 9
-    snakeFiveStart = 35
-    snakeFiveFinish = 11
+    snakeFiveStart = 0
+    snakeFiveFinish = 0
 
 ######SETTING UP SNAKES BOARD THREE######
 
 def setUpSnakesBoardThree():
     global snakeOneStart, snakeOneFinish, snakeTwoStart, snakeTwoFinish, snakeThreeStart, snakeThreeFinish, snakeFourStart, snakeFourFinish, snakeFiveStart, snakeFiveFinish
-    snakeOneStart = 63
-    snakeOneFinish = 37
+    snakeOneStart = 0
+    snakeOneFinish = 0
     snakeTwoStart = 0
     snakeTwoFinish = 0
     snakeThreeStart = 0
@@ -127,29 +127,29 @@ def setUpSnakesBoardThree():
 
 def setUpLaddersBoardOne():
     global ladderOneStart, ladderOneFinish, ladderTwoStart, ladderTwoFinish, ladderThreeStart, ladderThreeFinish, ladderFourStart, ladderFourFinish, ladderFiveStart, ladderFiveFinish
-    ladderOneStart = 0
-    ladderOneFinish = 0
-    ladderTwoStart = 0
-    ladderTwoFinish = 0
-    ladderThreeStart = 0
-    ladderThreeFinish = 0
-    ladderFourStart = 0
-    ladderFourFinish = 0
-    ladderFiveStart = 0
-    ladderFiveFinish = 0
+    ladderOneStart = 8
+    ladderOneFinish = 38
+    ladderTwoStart = 15
+    ladderTwoFinish = 40
+    ladderThreeStart = 45
+    ladderThreeFinish = 60
+    ladderFourStart = 57
+    ladderFourFinish = 81
+    ladderFiveStart = 43
+    ladderFiveFinish = 59
 
 ######SETTING UP LADDERS BOARD TWO######
 
 def setUpLaddersBoardTwo():
     global ladderOneStart, ladderOneFinish, ladderTwoStart, ladderTwoFinish, ladderThreeStart, ladderThreeFinish, ladderFourStart, ladderFourFinish, ladderFiveStart, ladderFiveFinish
-    ladderOneStart = 60
-    ladderOneFinish = 89
-    ladderTwoStart = 20
-    ladderTwoFinish = 40
-    ladderThreeStart = 17
+    ladderOneStart = 23
+    ladderOneFinish = 35
+    ladderTwoStart = 31
+    ladderTwoFinish = 46
+    ladderThreeStart = 12
     ladderThreeFinish = 27
-    ladderFourStart = 19
-    ladderFourFinish = 31
+    ladderFourStart = 0
+    ladderFourFinish = 0
     ladderFiveStart = 0
     ladderFiveFinish = 0
 
