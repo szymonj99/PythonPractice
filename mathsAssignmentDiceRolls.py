@@ -83,15 +83,15 @@ youStoppedOnPosition = []
 def setUpSnakesBoardOne():
     global snakeOneStart, snakeOneFinish, snakeTwoStart, snakeTwoFinish, snakeThreeStart, snakeThreeFinish, snakeFourStart, snakeFourFinish, snakeFiveStart, snakeFiveFinish
     snakeOneStart = 7
-    snakeOneFinish = 1
+    snakeOneFinish = 1 
     snakeTwoStart = 41
-    snakeTwoFinish = 17
+    snakeTwoFinish = 17 
     snakeThreeStart = 31
-    snakeThreeFinish = 19
+    snakeThreeFinish = 19 
     snakeFourStart = 23
-    snakeFourFinish = 11
+    snakeFourFinish = 11 
     snakeFiveStart = 68 
-    snakeFiveFinish = 50
+    snakeFiveFinish = 50 
 
 ######SETTING UP SNAKES BOARD TWO######
 
@@ -128,13 +128,13 @@ def setUpSnakesBoardThree():
 def setUpLaddersBoardOne():
     global ladderOneStart, ladderOneFinish, ladderTwoStart, ladderTwoFinish, ladderThreeStart, ladderThreeFinish, ladderFourStart, ladderFourFinish, ladderFiveStart, ladderFiveFinish
     ladderOneStart = 8
-    ladderOneFinish = 38
+    ladderOneFinish = 38 
     ladderTwoStart = 15
-    ladderTwoFinish = 40
+    ladderTwoFinish = 40 
     ladderThreeStart = 45
     ladderThreeFinish = 60
     ladderFourStart = 57
-    ladderFourFinish = 81
+    ladderFourFinish = 81 
     ladderFiveStart = 43
     ladderFiveFinish = 59
 
@@ -142,12 +142,12 @@ def setUpLaddersBoardOne():
 
 def setUpLaddersBoardTwo():
     global ladderOneStart, ladderOneFinish, ladderTwoStart, ladderTwoFinish, ladderThreeStart, ladderThreeFinish, ladderFourStart, ladderFourFinish, ladderFiveStart, ladderFiveFinish
-    ladderOneStart = 23
-    ladderOneFinish = 35
-    ladderTwoStart = 31
-    ladderTwoFinish = 46
-    ladderThreeStart = 12
-    ladderThreeFinish = 27
+    ladderOneStart = 0
+    ladderOneFinish = 0
+    ladderTwoStart = 0
+    ladderTwoFinish = 0
+    ladderThreeStart = 0
+    ladderThreeFinish = 0
     ladderFourStart = 0
     ladderFourFinish = 0
     ladderFiveStart = 0
